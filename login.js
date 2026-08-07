@@ -65,6 +65,10 @@ function showWelcomeScreen() {
 }
 
 function proceedToMainApp() {
+  // PAKSA SEMBUNYIKAN TOAST SAMBUTAN AGAR TIDAK MENGGANTUNG DI ATAS
+  const toast = document.getElementById('toast');
+  if (toast) toast.classList.remove('show');
+
   if (currentUser.role === 'admin') {
     completeLogin('admin-dashboard-page', "Selamat bertugas Admin!");
   } else {

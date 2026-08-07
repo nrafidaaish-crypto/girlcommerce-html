@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- File CSS Utama -->
+  <!-- File CSS Eksternal -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,10 +35,10 @@
     <!-- 0. HALAMAN PILIHAN PERAN -->
     <div id="role-selection-page" class="page landing-screen active">
       <div class="brand-logo"><i class="fa-solid fa-shoe-prints"></i></div>
-      <h2 style="color: var(--primary); font-weight:800; font-size: 26px;">Pretty Heels Store</h2>
-      <p style="font-size:12px; color: var(--text-muted); margin-bottom:30px;">Marketplace High Heels Wanita Elegant & Premium</p>
+      <h2 style="color: var(--primary-dark); font-weight:800; font-size: 26px;">Pretty Heels Store</h2>
+      <p style="font-size:12px; color: var(--primary); margin-bottom:30px; font-weight:500;">Marketplace High Heels Wanita Elegant & Premium</p>
 
-      <div style="text-align: left; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--primary);">
+      <div style="text-align: left; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--primary-dark);">
         <i class="fa-solid fa-user-check"></i> Pilih Akses Pengguna:
       </div>
 
@@ -62,18 +62,30 @@
     <!-- 1. HALAMAN LOGIN -->
     <div id="login-page" class="page landing-screen">
       <div class="brand-logo"><i class="fa-solid fa-shoe-prints"></i></div>
-      <h2 style="color: var(--primary); font-weight:800; font-size: 24px;" id="login-role-title">Login Pelanggan</h2>
-      <p style="font-size:12px; color: var(--text-muted); margin-bottom:24px;" id="login-role-subtitle">Silakan masukkan username dan password Anda</p>
+      <h2 style="color: var(--primary-dark); font-weight:800; font-size: 24px;" id="login-role-title">Login Pelanggan</h2>
+      <p style="font-size:12px; color: var(--primary); margin-bottom:24px; font-weight:500;" id="login-role-subtitle">Silakan masukkan data diri Anda</p>
 
       <form id="login-form" onsubmit="handleLogin(event)">
         <div class="input-group" style="text-align: left;">
           <label id="login-user-label">Username Pelanggan</label>
           <input type="text" id="login-username" placeholder="Masukkan Username..." required>
         </div>
+
+        <div class="input-group" style="text-align: left;">
+          <label id="login-email-label">Email</label>
+          <input type="email" id="login-email" placeholder="Masukkan Email..." required>
+        </div>
+
+        <div class="input-group" style="text-align: left;">
+          <label id="login-phone-label">No. Telepon</label>
+          <input type="tel" id="login-phone" placeholder="Masukkan Nomor Telepon..." required>
+        </div>
+
         <div class="input-group" style="text-align: left;">
           <label>Password</label>
           <input type="password" id="login-password" placeholder="Masukkan Password..." required>
         </div>
+
         <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Masuk Sekarang</button>
         <button type="button" class="btn btn-outline" style="margin-top: 10px;" onclick="goToRoleSelection()"><i class="fa-solid fa-arrow-left"></i> Kembali Pilih Peran</button>
       </form>
@@ -81,11 +93,11 @@
 
     <!-- 1.5. HALAMAN WELCOMING -->
     <div id="welcome-page" class="page landing-screen">
-      <div class="brand-logo" style="background: var(--surface); color: var(--primary);">
-        <i class="fa-solid fa-heart" style="font-size:42px; color:var(--primary);"></i>
+      <div class="brand-logo">
+        <i class="fa-solid fa-heart" style="font-size:42px;"></i>
       </div>
-      <h2 style="color: var(--primary); font-weight:800; font-size: 24px; margin-top: 10px;" id="welcome-heading">Selamat Datang!</h2>
-      <p style="font-size: 14px; color: var(--text-dark); margin: 16px 0 30px; line-height: 1.5;" id="welcome-subtext"></p>
+      <h2 style="color: var(--primary-dark); font-weight:800; font-size: 24px; margin-top: 10px;" id="welcome-heading">Selamat Datang!</h2>
+      <p style="font-size: 14px; color: var(--primary-dark); margin: 16px 0 30px; line-height: 1.5;" id="welcome-subtext"></p>
       <button class="btn btn-primary" id="welcome-action-btn" onclick="proceedToMainApp()">
         Masuk Ke Aplikasi <i class="fa-solid fa-arrow-right"></i>
       </button>
@@ -96,14 +108,14 @@
       <div class="banner-slider">
         <div>
           <h3 style="font-size:17px; font-weight: 700;">Koleksi Heels Terbaru!</h3>
-          <p style="font-size:11px; opacity:0.9;">Diskon Spesial Up To 50% Semua Heels</p>
+          <p style="font-size:11px;">Diskon Spesial Up To 50% Semua Heels</p>
         </div>
-        <i class="fa-solid fa-crown" style="font-size:38px; opacity:0.85;"></i>
+        <i class="fa-solid fa-crown" style="font-size:38px;"></i>
       </div>
 
       <div class="section-header">
         <span class="section-title">Koleksi Elegant Heels</span>
-        <span style="font-size:11px; color:var(--text-muted);">Pilihan Terfavorit</span>
+        <span style="font-size:11px; color:var(--primary); font-weight:600;">Pilihan Terfavorit</span>
       </div>
 
       <div class="product-grid" id="customer-product-list"></div>
@@ -128,16 +140,16 @@
 
     <!-- 5. CHECKOUT -->
     <div id="checkout-page" class="page">
-      <h3 style="font-size:14px; margin-bottom:12px;">Alamat Pengiriman</h3>
-      <div style="background:var(--surface); padding:12px; border-radius:var(--radius); margin-bottom:16px; font-size:12px;">
-        <p style="font-weight:600;"><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> <span id="checkout-cust-name">Seraphine Azellie</span> | 08123456789</p>
+      <h3 style="font-size:14px; margin-bottom:12px; color:var(--primary-dark);">Alamat Pengiriman</h3>
+      <div style="background:rgba(255, 255, 255, 0.94); padding:12px; border-radius:var(--radius); margin-bottom:16px; font-size:12px; border:1px solid var(--border-light);">
+        <p style="font-weight:600;"><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> <span id="checkout-cust-name">Seraphine Azellie</span> | <span id="checkout-cust-phone">08123456789</span></p>
         <p style="color:var(--text-muted); margin-top:4px;">Jl. Mawar No. 45, Kebayoran Baru, Jakarta Selatan</p>
       </div>
 
-      <h3 style="font-size:14px; margin-bottom:12px;">Rincian Pesanan</h3>
+      <h3 style="font-size:14px; margin-bottom:12px; color:var(--primary-dark);">Rincian Pesanan</h3>
       <div id="checkout-items"></div>
 
-      <h3 style="font-size:14px; margin-top:16px; margin-bottom:12px;">Metode Pembayaran</h3>
+      <h3 style="font-size:14px; margin-top:16px; margin-bottom:12px; color:var(--primary-dark);">Metode Pembayaran</h3>
       <div class="input-group">
         <select id="payment-method">
           <option value="Transfer Bank (BCA/Mandiri)">Transfer Bank (BCA/Mandiri)</option>
@@ -177,10 +189,10 @@
         <p style="font-size:12px; color:var(--text-muted);" id="profile-display-email">seraphineazellie@gmail.com</p>
       </div>
 
-      <div style="background:var(--surface); padding:16px; border-radius:var(--radius); font-size:13px; display:flex; flex-direction:column; gap:12px; margin-bottom:16px;">
+      <div style="background:rgba(255, 255, 255, 0.94); padding:16px; border-radius:var(--radius); font-size:13px; display:flex; flex-direction:column; gap:12px; margin-bottom:16px; border:1px solid var(--border-light);">
         <div>
           <strong style="color:var(--text-muted); font-size:11px; display:block;">NOMOR TELEPON</strong>
-          08123456789
+          <span id="profile-display-phone">08123456789</span>
         </div>
         <div>
           <strong style="color:var(--text-muted); font-size:11px; display:block;">ALAMAT UTAMA</strong>
@@ -211,7 +223,7 @@
           <div class="value" id="stat-sales">Rp 0</div>
         </div>
       </div>
-      <h3 style="font-size:14px; margin-bottom:12px;">Pesanan Masuk Terbaru</h3>
+      <h3 style="font-size:14px; margin-bottom:12px; color:var(--primary-dark);">Pesanan Masuk Terbaru</h3>
       <div id="admin-dashboard-recent-orders"></div>
     </div>
 
@@ -254,7 +266,7 @@
 
     <!-- 11. ADMIN LAPORAN -->
     <div id="admin-reports-page" class="page">
-      <div style="background: var(--surface); padding: 12px; border-radius: var(--radius); margin-bottom: 12px; border-left: 4px solid var(--primary); box-shadow: var(--shadow);">
+      <div style="background: rgba(255, 255, 255, 0.94); padding: 12px; border-radius: var(--radius); margin-bottom: 12px; border-left: 4px solid var(--primary); box-shadow: var(--shadow-card);">
         <div style="font-weight: 700; font-size: 13px; color: var(--text-dark);"><i class="fa-solid fa-store" style="color:var(--primary);"></i> Pretty Heels Store Official</div>
         <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;" id="report-periode-text">Periode Laporan: Hari Ini</div>
       </div>
@@ -266,7 +278,7 @@
       </div>
 
       <div class="checkout-summary" style="margin-top:0; margin-bottom: 16px;">
-        <h4 id="report-title" style="margin-bottom:12px; font-size:14px; color:var(--primary); border-bottom: 1px dashed var(--border); padding-bottom: 6px;">Ringkasan Laporan Harian</h4>
+        <h4 id="report-title" style="margin-bottom:12px; font-size:14px; color:var(--primary); border-bottom: 1px dashed var(--border-light); padding-bottom: 6px;">Ringkasan Laporan Harian</h4>
         
         <div class="summary-row">
           <span><i class="fa-solid fa-receipt" style="color:var(--text-muted);"></i> Total Transaksi</span>
@@ -291,7 +303,7 @@
         </div>
       </div>
 
-      <h4 style="font-size:13px; font-weight:700; margin-bottom:10px; color:var(--text-dark);"><i class="fa-solid fa-list-check" style="color:var(--primary);"></i> Rincian Transaksi Terkait</h4>
+      <h4 style="font-size:13px; font-weight:700; margin-bottom:10px; color:var(--primary-dark);"><i class="fa-solid fa-list-check" style="color:var(--primary);"></i> Rincian Transaksi Terkait</h4>
       <div id="report-transaction-list"></div>
     </div>
 
@@ -300,14 +312,14 @@
       <div class="profile-header">
         <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" alt="Admin" class="profile-img">
         <span class="badge-store" style="display:inline-block; margin-bottom:6px;">SUPER ADMIN & STORE MANAGER</span>
-        <h3 style="font-size:16px;">Hiraya Georgienne</h3>
-        <p style="font-size:12px; color:var(--text-muted);">hirayageorgienne@gmail.com</p>
+        <h3 style="font-size:16px;" id="admin-profile-name">Hiraya Georgienne</h3>
+        <p style="font-size:12px; color:var(--text-muted);" id="admin-profile-email">hirayagienne@gmail.com</p>
       </div>
 
       <div class="admin-info-section">
         <div class="admin-info-title"><i class="fa-solid fa-user-shield"></i> Detail Akun Manajerial</div>
         <div class="info-list-item"><span>ID Pegawai</span><span>ADM-PHS-2026-001</span></div>
-        <div class="info-list-item"><span>No. Telepon Operational</span><span>+62 812-9988-7766</span></div>
+        <div class="info-list-item"><span>No. Telepon Operational</span><span id="admin-profile-phone">082839103746</span></div>
         <div class="info-list-item"><span>Cabang Wilayah</span><span>HQ Jakarta Selatan</span></div>
         <div class="info-list-item"><span>Shift Operational</span><span>Shift Utama (08.00 - 17.00 WIB)</span></div>
       </div>
@@ -332,8 +344,8 @@
     <!-- POP-UP MODAL VARIASI WARNA -->
     <div id="variant-sheet-modal" class="modal-overlay">
       <div class="modal-sheet">
-        <div style="display:flex; gap:12px; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:12px;">
-          <img id="sheet-prod-img" src="" style="width:75px; height:75px; object-fit:cover; border-radius:8px;" alt="Produk">
+        <div style="display:flex; gap:12px; border-bottom:1px solid var(--border-light); padding-bottom:12px; margin-bottom:12px;">
+          <img id="sheet-prod-img" src="" style="width:75px; height:75px; object-fit:cover; border-radius:10px;" alt="Produk">
           <div style="flex:1;">
             <button onclick="closeVariantSheet()" style="float:right; border:none; background:none; font-size:18px; color:#888; cursor:pointer;">&times;</button>
             <div id="sheet-prod-price" style="color:var(--primary); font-weight:700; font-size:16px;">Rp 0</div>
@@ -357,7 +369,7 @@
           </div>
         </div>
 
-        <button class="btn btn-primary" id="sheet-action-btn" style="font-size:15px; border-radius:8px;" onclick="confirmSheetAction()">Beli Sekarang</button>
+        <button class="btn btn-primary" id="sheet-action-btn" style="font-size:15px; border-radius:10px;" onclick="confirmSheetAction()">Beli Sekarang</button>
       </div>
     </div>
 
@@ -366,11 +378,7 @@
 
   </div>
 
-  <!-- LOAD JS SECARA BERURUTAN -->
-  <script src="data.js"></script>
+  <!-- File JS Eksternal -->
   <script src="app.js"></script>
-  <script src="login.js"></script>
-  <script src="customer.js"></script>
-  <script src="admin.js"></script>
 </body>
 </html>

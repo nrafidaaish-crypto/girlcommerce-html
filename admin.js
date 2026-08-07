@@ -108,16 +108,37 @@ function deleteProduct(id) {
   }
 }
 
+/* FUNGSI PENARINGAN LAPORAN BERDASARKAN TAB */
 function switchReportTab(type, element) {
   if (element) {
     element.parentElement.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
     element.classList.add('active');
   }
 
-  const activeOrders = type === 'harian' 
-    ? orders.filter(o => o.category === 'harian' || o.date === '07 Ags 2026')
-    : orders;
+  // Filter Bertingkat: Harian -> Bulanan (Harian + Bulanan) -> Tahunan (Semua)
+  let activeOrders = [];
+  let titleText = "";
+  let periodeText = "";
 
+  if (type === 'harian') {
+    activeOrders = orders.filter(o => o.category === 'harian');
+    titleText = "Ringkasan Laporan Harian";
+    periodeText = "Periode Laporan: Hari Ini (07 Ags 2026)";
+  } else if (type === 'bulanan') {
+    activeOrders = orders.filter(o => o.category === 'harian' || o.category === 'bulanan');
+    titleText = "Ringkasan Laporan Bulanan";
+    periodeText = "Periode Laporan: Agustus 2026";
+  } else if (type === 'tahunan') {
+    activeOrders = orders; // Mengambil semua transaksi
+    titleText = "Ringkasan Laporan Tahunan";
+    periodeText = "Periode Laporan: Tahun 2026";
+  }
+
+  // Update Teks Judul
+  document.getElementById('report-title').innerText = titleText;
+  document.getElementById('report-periode-text').innerText = periodeText;
+
+  // Hitung Kalkulasi Laporan
   let totalGross = activeOrders.reduce((sum, o) => sum + o.total, 0);
   let totalItems = activeOrders.reduce((sum, o) => sum + o.items.reduce((iSum, i) => iSum + i.qty, 0), 0);
   const adminFee = Math.round(totalGross * 0.03);
@@ -128,6 +149,7 @@ function switchReportTab(type, element) {
   document.getElementById('report-fee').innerText = `- Rp ${adminFee.toLocaleString('id-ID')}`;
   document.getElementById('report-revenue').innerText = `Rp ${(totalGross - adminFee).toLocaleString('id-ID')}`;
 
+  // Render Daftar Transaksi Terkait
   const listEl = document.getElementById('report-transaction-list');
   listEl.innerHTML = activeOrders.map(o => `
     <div style="background:var(--surface); padding:12px; border-radius:var(--radius); margin-bottom:10px; font-size:12px;">

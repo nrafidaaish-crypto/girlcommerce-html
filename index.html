@@ -4,334 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Pretty Heels Store - Marketplace Heels Wanita</title>
-  <!-- Google Fonts & FontAwesome -->
+  
+  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <style>
-    :root {
-      --primary: #C2185B;       /* Pink Tua Elegan */
-      --secondary: #F8BBD0;     /* Pink Muda Lembut */
-      --accent: #E91E63;        /* Aksen Pink Terang */
-      --bg-color: #FFF0F5;      /* Background Tinted Pink */
-      --surface: #FFFFFF;
-      --text-dark: #2C1820;
-      --text-muted: #8E707B;
-      --border: #F3C6D8;
-      --shadow: 0 4px 18px rgba(194, 24, 91, 0.12);
-      --radius: 14px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    h1, h2, h3, .header-title, .brand-logo-text {
-      font-family: 'Playfair Display', serif;
-    }
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-dark);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    #app-container {
-      width: 100%;
-      max-width: 480px;
-      background-color: var(--bg-color);
-      min-height: 100vh;
-      position: relative;
-      padding-bottom: 80px;
-      box-shadow: 0 0 25px rgba(194, 24, 91, 0.08);
-    }
-
-    .btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: var(--radius);
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-primary { background-color: var(--primary); color: white; }
-    .btn-primary:active { background-color: #a3134c; transform: scale(0.98); }
-    .btn-outline { border: 1.5px solid var(--primary); color: var(--primary); background: transparent; }
-    .btn-secondary { background-color: var(--secondary); color: var(--primary); }
-
-    .input-group { margin-bottom: 15px; }
-    .input-group label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-dark);
-      margin-bottom: 6px;
-    }
-    .input-group input, .input-group select, .input-group textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface);
-      font-size: 14px;
-      outline: none;
-    }
-
-    #toast {
-      position: fixed;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--text-dark);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 25px;
-      font-size: 13px;
-      font-weight: 500;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      z-index: 9999;
-      transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      max-width: 90%;
-      white-space: nowrap;
-    }
-    #toast.show { top: 20px; }
-    #toast i { color: var(--secondary); }
-
-    .sticky-header {
-      position: sticky;
-      top: 0;
-      background: var(--surface);
-      z-index: 1000;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-    }
-    .header-title { font-weight: 700; color: var(--primary); font-size: 19px; letter-spacing: 0.5px; }
-    .cart-icon-btn {
-      position: relative;
-      background: transparent;
-      border: none;
-      font-size: 20px;
-      color: var(--primary);
-      cursor: pointer;
-    }
-    .cart-badge {
-      position: absolute;
-      top: -6px;
-      right: -8px;
-      background: var(--primary);
-      color: white;
-      font-size: 10px;
-      font-weight: 700;
-      border-radius: 10px;
-      padding: 2px 6px;
-      border: 2px solid var(--surface);
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      background: var(--surface);
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      border-top: 1px solid var(--border);
-      z-index: 1000;
-    }
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 10px;
-      color: var(--text-muted);
-      cursor: pointer;
-      border: none;
-      background: none;
-      gap: 4px;
-      width: 20%;
-    }
-    .nav-item i { font-size: 18px; }
-    .nav-item.active { color: var(--primary); font-weight: 600; }
-
-    /* MANAGING VISIBILITY HALAMAN SECARA KETAT */
-    .page { 
-      display: none !important; 
-      padding: 16px; 
-    }
-    .page.active { 
-      display: block !important; 
-    }
-
-    /* KHUSUS HALAMAN PERAN & LOGIN DENGAN LAYOUT FLEX CENTER */
-    .page.landing-screen {
-      padding: 40px 24px;
-      text-align: center;
-      background: linear-gradient(180deg, var(--secondary) 0%, var(--bg-color) 45%);
-      min-height: 100vh;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .page.landing-screen.active {
-      display: flex !important;
-    }
-
-    .brand-logo {
-      width: 85px; height: 85px;
-      background: var(--primary); color: white;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 38px; margin: 0 auto 16px;
-      box-shadow: var(--shadow);
-    }
-
-    .role-card-btn {
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      margin-bottom: 14px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      transition: all 0.25s ease;
-      box-shadow: var(--shadow);
-    }
-    .role-card-btn:active, .role-card-btn:hover {
-      border-color: var(--primary);
-      background: #FFF8FA;
-      transform: translateY(-2px);
-    }
-    .role-icon-box {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: var(--secondary);
-      color: var(--primary);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-    }
-
-    .banner-slider {
-      width: 100%; height: 140px;
-      background: linear-gradient(135deg, #E91E63, #C2185B);
-      border-radius: var(--radius); margin-bottom: 16px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px; color: white;
-    }
-    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .section-title { font-size: 16px; font-weight: 700; color: var(--text-dark); }
-
-    .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .product-card {
-      background: var(--surface); border-radius: var(--radius);
-      overflow: hidden; box-shadow: var(--shadow);
-      display: flex; flex-direction: column; cursor: pointer;
-    }
-    .product-img { width: 100%; height: 160px; object-fit: cover; background: #F8F8F8; }
-    .product-info { padding: 10px; flex: 1; display: flex; flex-direction: column; }
-    .product-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3; }
-    .product-price { color: var(--primary); font-weight: 700; font-size: 14px; margin-bottom: 6px; }
-    .product-meta { font-size: 10px; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-    .badge-store { font-size: 9px; background: var(--secondary); color: var(--primary); padding: 2px 6px; border-radius: 4px; width: fit-content; margin-bottom: 4px; font-weight: 600; }
-
-    .detail-img { width: 100%; height: 320px; object-fit: cover; border-radius: 0 0 var(--radius) var(--radius); }
-    .detail-container { padding: 16px; background: var(--surface); margin-top: -10px; border-radius: 16px 16px 0 0; }
-
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5); z-index: 9998;
-      display: none; align-items: flex-end; justify-content: center;
-    }
-    .modal-overlay.active { display: flex; }
-
-    .modal-sheet {
-      width: 100%; max-width: 480px; background: var(--surface);
-      border-radius: 16px 16px 0 0; padding: 16px; max-height: 85vh;
-      overflow-y: auto; position: relative;
-      animation: slideUp 0.3s ease-out;
-    }
-    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-
-    .variant-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 16px; }
-    .variant-card-btn {
-      display: flex; align-items: center; gap: 6px; padding: 6px 10px;
-      border: 1px solid var(--border); background: #FAFAFA;
-      border-radius: 8px; font-size: 11px; font-weight: 500; cursor: pointer;
-    }
-    .variant-card-btn img { width: 24px; height: 24px; border-radius: 4px; object-fit: cover; }
-    .variant-card-btn.active { border-color: var(--primary); background: #FFF0F5; color: var(--primary); font-weight: 600; }
-
-    .qty-control { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-    .qty-btn { width: 30px; height: 30px; border: none; background: transparent; font-weight: 700; cursor: pointer; }
-    .qty-val { width: 34px; text-align: center; font-size: 13px; font-weight: 600; }
-
-    .review-card { background: var(--surface); padding: 12px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
-    .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-    .review-user { font-weight: 600; font-size: 12px; }
-    .review-date { font-size: 10px; color: var(--text-muted); }
-    .review-variant { font-size: 10px; color: var(--text-muted); margin-bottom: 6px; }
-    .review-comment { font-size: 12px; color: #333; line-height: 1.4; }
-
-    .cart-item, .order-card {
-      background: var(--surface); padding: 12px; border-radius: var(--radius);
-      margin-bottom: 12px; display: flex; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-    .cart-img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; }
-    .cart-details { flex: 1; }
-    .checkout-summary { background: var(--surface); padding: 16px; border-radius: var(--radius); margin-top: 16px; }
-    .summary-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
-    .summary-row.total { font-size: 15px; font-weight: 700; color: var(--primary); border-top: 1px dashed var(--border); padding-top: 8px; }
-
-    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
-    .stat-card { background: var(--surface); padding: 16px; border-radius: var(--radius); box-shadow: var(--shadow); }
-    .stat-card h4 { font-size: 11px; color: var(--text-muted); font-weight: 500; }
-    .stat-card .value { font-size: 18px; font-weight: 700; color: var(--primary); margin-top: 4px; }
-
-    .profile-header { text-align: center; padding: 20px; background: var(--surface); border-radius: var(--radius); margin-bottom: 16px; }
-    .profile-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); margin-bottom: 10px; }
-
-    .admin-info-section { background: var(--surface); border-radius: var(--radius); padding: 16px; margin-bottom: 16px; }
-    .admin-info-title { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 10px; border-bottom: 1px dashed var(--border); padding-bottom: 6px; }
-    .info-list-item { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
-    .info-list-item span:first-child { color: var(--text-muted); }
-    .info-list-item span:last-child { font-weight: 600; text-align: right; }
-
-    .role-selector {
-      display: flex; background: #F8D3E0;
-      border-radius: 25px; padding: 4px; margin-bottom: 24px;
-    }
-    .role-btn {
-      flex: 1; padding: 8px; border-radius: 20px; border: none;
-      font-weight: 600; font-size: 12px; color: var(--text-muted);
-      cursor: pointer; background: transparent; transition: 0.3s;
-    }
-    .role-btn.active { background: var(--surface); color: var(--primary); }
-
-    .text-center { text-align: center; }
-    .mt-10 { margin-top: 10px; }
-    .flex-between { display: flex; justify-content: space-between; align-items: center; }
-  </style>
+  <!-- File CSS Utama -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -353,7 +32,7 @@
       </div>
     </header>
 
-    <!-- 0. HALAMAN PILIHAN PERAN (AWAL) -->
+    <!-- 0. HALAMAN PILIHAN PERAN -->
     <div id="role-selection-page" class="page landing-screen active">
       <div class="brand-logo"><i class="fa-solid fa-shoe-prints"></i></div>
       <h2 style="color: var(--primary); font-weight:800; font-size: 26px;">Pretty Heels Store</h2>
@@ -380,7 +59,7 @@
       </div>
     </div>
 
-    <!-- 1. HALAMAN LOGIN (SESUAI PERAN) -->
+    <!-- 1. HALAMAN LOGIN -->
     <div id="login-page" class="page landing-screen">
       <div class="brand-logo"><i class="fa-solid fa-shoe-prints"></i></div>
       <h2 style="color: var(--primary); font-weight:800; font-size: 24px;" id="login-role-title">Login Pelanggan</h2>
@@ -400,7 +79,19 @@
       </form>
     </div>
 
-    <!-- 2. HALAMAN MARKETPLACE (PELANGGAN) -->
+    <!-- 1.5. HALAMAN WELCOMING -->
+    <div id="welcome-page" class="page landing-screen">
+      <div class="brand-logo" style="background: var(--surface); color: var(--primary);">
+        <i class="fa-solid fa-heart" style="font-size:42px; color:var(--primary);"></i>
+      </div>
+      <h2 style="color: var(--primary); font-weight:800; font-size: 24px; margin-top: 10px;" id="welcome-heading">Selamat Datang!</h2>
+      <p style="font-size: 14px; color: var(--text-dark); margin: 16px 0 30px; line-height: 1.5;" id="welcome-subtext"></p>
+      <button class="btn btn-primary" id="welcome-action-btn" onclick="proceedToMainApp()">
+        Masuk Ke Aplikasi <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+    <!-- 2. MARKETPLACE (PELANGGAN) -->
     <div id="customer-home" class="page">
       <div class="banner-slider">
         <div>
@@ -418,12 +109,12 @@
       <div class="product-grid" id="customer-product-list"></div>
     </div>
 
-    <!-- 3. HALAMAN DETAIL PRODUK -->
+    <!-- 3. DETAIL PRODUK -->
     <div id="product-detail-page" class="page" style="padding:0;">
       <div id="detail-content"></div>
     </div>
 
-    <!-- 4. HALAMAN KERANJANG -->
+    <!-- 4. KERANJANG -->
     <div id="cart-page" class="page">
       <div id="cart-items-container"></div>
       <div id="cart-footer" class="checkout-summary" style="display:none; margin-top:20px;">
@@ -435,11 +126,11 @@
       </div>
     </div>
 
-    <!-- 5. HALAMAN CHECKOUT -->
+    <!-- 5. CHECKOUT -->
     <div id="checkout-page" class="page">
       <h3 style="font-size:14px; margin-bottom:12px;">Alamat Pengiriman</h3>
       <div style="background:var(--surface); padding:12px; border-radius:var(--radius); margin-bottom:16px; font-size:12px;">
-        <p style="font-weight:600;"><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> <span id="checkout-cust-name">Pelanggan</span> | 08123456789</p>
+        <p style="font-weight:600;"><i class="fa-solid fa-location-dot" style="color:var(--primary);"></i> <span id="checkout-cust-name">Seraphine Azellie</span> | 08123456789</p>
         <p style="color:var(--text-muted); margin-top:4px;">Jl. Mawar No. 45, Kebayoran Baru, Jakarta Selatan</p>
       </div>
 
@@ -472,18 +163,18 @@
       </div>
     </div>
 
-    <!-- 6. HALAMAN RIWAYAT PESANAN -->
+    <!-- 6. RIWAYAT PESANAN -->
     <div id="customer-orders-page" class="page">
       <div id="customer-order-list"></div>
     </div>
 
-    <!-- 7. HALAMAN PROFIL PELANGGAN -->
+    <!-- 7. PROFIL PELANGGAN -->
     <div id="customer-profile-page" class="page">
       <div class="profile-header">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500" alt="Pelanggan" class="profile-img">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80" alt="Pelanggan" class="profile-img">
         <span class="badge-store" style="display:inline-block; margin-bottom:6px;">PELANGGAN VIP</span>
-        <h3 style="font-size:16px;" id="profile-display-name">Pelanggan Store</h3>
-        <p style="font-size:12px; color:var(--text-muted);" id="profile-display-email">pelanggan@gmail.com</p>
+        <h3 style="font-size:16px;" id="profile-display-name">Seraphine Azellie</h3>
+        <p style="font-size:12px; color:var(--text-muted);" id="profile-display-email">seraphineazellie@gmail.com</p>
       </div>
 
       <div style="background:var(--surface); padding:16px; border-radius:var(--radius); font-size:13px; display:flex; flex-direction:column; gap:12px; margin-bottom:16px;">
@@ -500,7 +191,7 @@
       <button class="btn btn-outline" style="border-color:#FF3B30; color:#FF3B30;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Keluar dari Akun</button>
     </div>
 
-    <!-- 8. HALAMAN ADMIN DASHBOARD -->
+    <!-- 8. ADMIN DASHBOARD -->
     <div id="admin-dashboard-page" class="page">
       <div class="stats-grid">
         <div class="stat-card">
@@ -513,7 +204,7 @@
         </div>
         <div class="stat-card">
           <h4>Pelanggan</h4>
-          <div class="value" id="stat-customers">24</div>
+          <div class="value" id="stat-customers">7</div>
         </div>
         <div class="stat-card">
           <h4>Penjualan</h4>
@@ -524,7 +215,7 @@
       <div id="admin-dashboard-recent-orders"></div>
     </div>
 
-    <!-- 9. HALAMAN ADMIN INPUT PRODUK -->
+    <!-- 9. ADMIN INPUT PRODUK -->
     <div id="admin-input-page" class="page">
       <form id="product-form" onsubmit="saveProduct(event)">
         <input type="hidden" id="input-prod-id">
@@ -556,27 +247,24 @@
       </form>
     </div>
 
-    <!-- 10. HALAMAN ADMIN KELOLA PRODUK -->
+    <!-- 10. ADMIN KELOLA PRODUK -->
     <div id="admin-products-page" class="page">
       <div id="admin-product-list"></div>
     </div>
 
-    <!-- 11. HALAMAN ADMIN LAPORAN -->
+    <!-- 11. ADMIN LAPORAN -->
     <div id="admin-reports-page" class="page">
-      <!-- Identitas Toko -->
       <div style="background: var(--surface); padding: 12px; border-radius: var(--radius); margin-bottom: 12px; border-left: 4px solid var(--primary); box-shadow: var(--shadow);">
         <div style="font-weight: 700; font-size: 13px; color: var(--text-dark);"><i class="fa-solid fa-store" style="color:var(--primary);"></i> Pretty Heels Store Official</div>
         <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;" id="report-periode-text">Periode Laporan: Hari Ini</div>
       </div>
 
-      <!-- Tab Navigasi Laporan -->
       <div class="role-selector" style="margin-bottom: 16px;">
         <button class="role-btn active" onclick="switchReportTab('harian', this)">Harian</button>
         <button class="role-btn" onclick="switchReportTab('bulanan', this)">Bulanan</button>
         <button class="role-btn" onclick="switchReportTab('tahunan', this)">Tahunan</button>
       </div>
 
-      <!-- Ringkasan Laporan Keuangan -->
       <div class="checkout-summary" style="margin-top:0; margin-bottom: 16px;">
         <h4 id="report-title" style="margin-bottom:12px; font-size:14px; color:var(--primary); border-bottom: 1px dashed var(--border); padding-bottom: 6px;">Ringkasan Laporan Harian</h4>
         
@@ -603,18 +291,17 @@
         </div>
       </div>
 
-      <!-- Rincian Tabel Transaksi -->
       <h4 style="font-size:13px; font-weight:700; margin-bottom:10px; color:var(--text-dark);"><i class="fa-solid fa-list-check" style="color:var(--primary);"></i> Rincian Transaksi Terkait</h4>
       <div id="report-transaction-list"></div>
     </div>
 
-    <!-- 12. HALAMAN ADMIN PROFIL -->
+    <!-- 12. ADMIN PROFIL -->
     <div id="admin-profile-page" class="page">
       <div class="profile-header">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500" alt="Admin" class="profile-img">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" alt="Admin" class="profile-img">
         <span class="badge-store" style="display:inline-block; margin-bottom:6px;">SUPER ADMIN & STORE MANAGER</span>
-        <h3 style="font-size:16px;">Sabine Rylee</h3>
-        <p style="font-size:12px; color:var(--text-muted);">Sabineryle@gmail.com</p>
+        <h3 style="font-size:16px;">Hiraya Georgienne</h3>
+        <p style="font-size:12px; color:var(--text-muted);">hirayageorgienne@gmail.com</p>
       </div>
 
       <div class="admin-info-section">
@@ -642,7 +329,7 @@
       <button class="btn btn-outline" style="border-color:#FF3B30; color:#FF3B30;" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> Keluar dari Akun Admin</button>
     </div>
 
-    <!-- POP-UP MODAL VARIASI WARNA & JUMLAH -->
+    <!-- POP-UP MODAL VARIASI WARNA -->
     <div id="variant-sheet-modal" class="modal-overlay">
       <div class="modal-sheet">
         <div style="display:flex; gap:12px; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:12px;">
@@ -679,1083 +366,11 @@
 
   </div>
 
-  <!-- SCRIPT JAVASCRIPT TERPADU -->
-  <script>
-    /* STATE MANAGEMENT GLOBAL */
-    let currentUser = null;
-    let selectedRole = 'customer';
-    let selectedDetailProduct = null;
-    let selectedColor = '';
-    let selectedQuantity = 1;
-    let sheetTargetIndex = null;
-    let sheetActionMode = 'buy_now';
-    let historyStack = [];
-
-    /* DATABASE PRODUK LENGKAP (15 HEELS RIIL DENGAN GAMBAR STABIL) */
-    let products = [
-      {
-        id: 1,
-        name: "Classic Stiletto Leather Pumps 9cm",
-        price: 285000,
-        stock: 50,
-        rating: 4.9,
-        sold: 184,
-        colors: ["PINK", "HITAM", "PUTIH", "NUDE"],
-        colorMap: {
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-          "HITAM": "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-          "PUTIH": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?w=500",
-          "NUDE": "https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-        desc: "Classic Stiletto Leather Pumps dengan ketinggian 9cm dirancang khusus untuk memberikan tampilan jenjang, anggun, dan penuh percaya diri di setiap acara formal maupun pesta.",
-        reviews: [
-          { name: "Clarissa M.", rating: 5, date: "02 Ags 2026", variant: "Warna: PINK", comment: "Bagus banget heelsnya! Sol dalamnya empuk dan gak bikin kaki lecet ❤️❤️" },
-          { name: "Anisa Syarif", rating: 5, date: "28 Jul 2026", variant: "Warna: NUDE", comment: "Sangat elegan untuk dipakai ke kantor dan acara formal." }
-        ]
-      },
-      {
-        id: 2,
-        name: "Glamour Crystal Strap Party Heels",
-        price: 325000,
-        stock: 35,
-        rating: 5.0,
-        sold: 142,
-        colors: ["PINK", "PUTIH", "HITAM"],
-        colorMap: {
-          "PINK": "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-          "PUTIH": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-          "HITAM": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-        desc: "Glamour Crystal Strap Heels dihiasi tali berkilau kristal mewah. Cocok bagi Anda yang ingin menjadi pusat perhatian di pesta pernikahan maupun gala dinner.",
-        reviews: [
-          { name: "Bellani_P", rating: 5, date: "03 Ags 2026", variant: "Warna: PINK", comment: "Sumpah kilau kristalnya mewah bangettt, bikin kaki kelihatan cantik!" }
-        ]
-      },
-      {
-        id: 3,
-        name: "Korean Ankle Strap Block Heels 5cm",
-        price: 195000,
-        stock: 60,
-        rating: 4.8,
-        sold: 230,
-        colors: ["NUDE", "HITAM", "PINK"],
-        colorMap: {
-          "NUDE": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?w=500",
-          "HITAM": "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500",
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?w=500",
-        desc: "Korean Ankle Strap Block Heels dengan hak tahu 5cm yang sangat stabil dan nyaman dipakai seharian tanpa pegal.",
-        reviews: [
-          { name: "Lestari_A", rating: 5, date: "04 Ags 2026", variant: "Warna: NUDE", comment: "Tingginya pas banget buat dipake kerja seharian, ga bikin capek." }
-        ]
-      },
-      {
-        id: 4,
-        name: "Velvet Pointed Toe Mule Heels",
-        price: 245000,
-        stock: 28,
-        rating: 4.9,
-        sold: 95,
-        colors: ["HITAM", "PINK", "PUTIH"],
-        colorMap: {
-          "HITAM": "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500",
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-          "PUTIH": "https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500",
-        desc: "Mule Heels bahan velvet premium dengan bentuk lancip depan (pointed toe) memberikan kesan vintage, mewah, dan sangat praktis untuk dilepas pasang.",
-        reviews: [
-          { name: "Gita_K", rating: 5, date: "01 Ags 2026", variant: "Warna: HITAM", comment: "Bahan beludrunya lembut bgt dan keliatan mahal!" }
-        ]
-      },
-      {
-        id: 5,
-        name: "Nude Slingback Office Heels 7cm",
-        price: 260000,
-        stock: 40,
-        rating: 4.8,
-        sold: 160,
-        colors: ["NUDE", "PUTIH", "HITAM"],
-        colorMap: {
-          "NUDE": "https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=500",
-          "PUTIH": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-          "HITAM": "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=500",
-        desc: "Slingback Heels bernuansa warna Nude yang memberikan efek kaki lebih jenjang dan cocok dipadukan dengan busana kerja maupun kasual estetik.",
-        reviews: [
-          { name: "Dewi_Anggraini", rating: 5, date: "30 Jul 2026", variant: "Warna: NUDE", comment: "Warna nudenya pas di kulit Indonesia, cantik bgt!" }
-        ]
-      },
-      {
-        id: 6,
-        name: "Elegant Pearl Bridal High Heels",
-        price: 365000,
-        stock: 20,
-        rating: 5.0,
-        sold: 88,
-        colors: ["PUTIH", "PINK"],
-        colorMap: {
-          "PUTIH": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-        desc: "Bridal Heels pilihan para pengantin modern, dihiasi dengan aksen mutiara imitasi berkualitas tinggi yang dirangkai rapi memancarkan keanggunan sejati.",
-        reviews: [
-          { name: "Siska_Valerie", rating: 5, date: "29 Jul 2026", variant: "Warna: PUTIH", comment: "Sempurna buat acara lamaran kemarin, semua pada puji mutiaranya!" }
-        ]
-      },
-      {
-        id: 7,
-        name: "Chunky Platform High Heels 10cm",
-        price: 295000,
-        stock: 30,
-        rating: 4.7,
-        sold: 110,
-        colors: ["HITAM", "PINK", "PUTIH"],
-        colorMap: {
-          "HITAM": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-          "PINK": "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-          "PUTIH": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-        desc: "Platform Heels dengan sol depan tinggi sehingga mengurangi sudut kemiringan kaki, menjadikan heels 10cm ini tetap nyaman dan kokoh melangkah.",
-        reviews: [
-          { name: "Nadia_Fitri", rating: 5, date: "26 Jul 2026", variant: "Warna: HITAM", comment: "Walau tinggi 10cm tapi karena ada platform depan jd ga kerasa pegel." }
-        ]
-      },
-      {
-        id: 8,
-        name: "Satin Ribbon Bow Kitten Heels",
-        price: 235000,
-        stock: 45,
-        rating: 4.9,
-        sold: 175,
-        colors: ["PINK", "PUTIH", "HITAM"],
-        colorMap: {
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-          "PUTIH": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-          "HITAM": "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-        desc: "Satin Ribbon Bow Kitten Heels mengusung pita kain satin yang feminin dengan hak kecil 4cm yang manis, memberikan style girly nan elegan.",
-        reviews: [
-          { name: "Ayu_Permata", rating: 5, date: "22 Jul 2026", variant: "Warna: PINK", comment: "Pintanya imut banget, bahannya mengkilap halus." }
-        ]
-      },
-      {
-        id: 9,
-        name: "Metallic Strappy Stiletto Heels",
-        price: 310000,
-        stock: 25,
-        rating: 4.8,
-        sold: 76,
-        colors: ["PINK", "NUDE", "HITAM"],
-        colorMap: {
-          "PINK": "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-          "NUDE": "https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=500",
-          "HITAM": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-        desc: "Strappy Heels berbahan kulit aksen metalik mengkilap dengan desain silang tali yang memperindah kurva kaki wanita.",
-        reviews: [
-          { name: "Rina_Maya", rating: 5, date: "20 Jul 2026", variant: "Warna: PINK", comment: "Desain talinya cantik dan pas di kaki mekar sekalipun!" }
-        ]
-      },
-      {
-        id: 10,
-        name: "Minimalist Kitten Heel Sandals 3cm",
-        price: 180000,
-        stock: 55,
-        rating: 4.7,
-        sold: 215,
-        colors: ["PUTIH", "HITAM", "PINK"],
-        colorMap: {
-          "PUTIH": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?w=500",
-          "HITAM": "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500",
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?w=500",
-        desc: "Sandal Heels simpel dengan hak rendah 3cm, cocok untuk pemakaian santai harian maupun jalan-jalan ke mall dengan rasa aman dan rileks.",
-        reviews: [
-          { name: "Fitri_H", rating: 5, date: "18 Jul 2026", variant: "Warna: PUTIH", comment: "Simple dan ga ribet, pas buat yang baru belajar pake heels!" }
-        ]
-      },
-      {
-        id: 11,
-        name: "Transparent Lucite Strap Heels",
-        price: 275000,
-        stock: 33,
-        rating: 4.9,
-        sold: 132,
-        colors: ["PUTIH", "PINK"],
-        colorMap: {
-          "PUTIH": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-        desc: "Kaca/Transparan Heels (Lucite Heels) kekinian yang dipopulerkan selebriti, menciptakan ilusi kaki jenjang dan estetik sempurna.",
-        reviews: [
-          { name: "Tania_S", rating: 5, date: "15 Jul 2026", variant: "Warna: PUTIH", comment: "Heels kaca estetik bgt, dipake foto OOTD hasilnya makin keren!" }
-        ]
-      },
-      {
-        id: 12,
-        name: "Suede Ankle Strap Heels 7cm",
-        price: 220000,
-        stock: 42,
-        rating: 4.8,
-        sold: 108,
-        colors: ["HITAM", "NUDE", "PINK"],
-        colorMap: {
-          "HITAM": "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500",
-          "NUDE": "https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=500",
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500",
-        desc: "Suede Ankle Strap Heels berbahan kulit beludru halus dengan lingkar pergelangan kaki yang dapat disesuaikan tingkat kerapatannya.",
-        reviews: [
-          { name: "Melani_O", rating: 5, date: "12 Jul 2026", variant: "Warna: HITAM", comment: "Bahan suede premium halus, tidak gatal di kulit." }
-        ]
-      },
-      {
-        id: 13,
-        name: "Red Carpet Patent Leather Pumps",
-        price: 340000,
-        stock: 22,
-        rating: 5.0,
-        sold: 94,
-        colors: ["PINK", "HITAM", "PUTIH"],
-        colorMap: {
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-          "HITAM": "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-          "PUTIH": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500",
-        desc: "Patent Leather Pumps dengan kilau mengkilap khas karpet merah. Memberi kesan glamor instan pada penampilan Anda.",
-        reviews: [
-          { name: "Vina_L", rating: 5, date: "10 Jul 2026", variant: "Warna: PINK", comment: "Modelnya bold dan bikin pudar semua heels lainnya di lemari aku!" }
-        ]
-      },
-      {
-        id: 14,
-        name: "Gold Mirror Strappy High Heels",
-        price: 350000,
-        stock: 18,
-        rating: 4.9,
-        sold: 67,
-        colors: ["PINK", "PUTIH"],
-        colorMap: {
-          "PINK": "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-          "PUTIH": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1596147250788-bf8ce2338072?w=500",
-        desc: "High Heels mewah berlapis warna emas cermin glamor, pilihan paling pas untuk gaun pesta perkawinan dan perayaan megah.",
-        reviews: [
-          { name: "Jessica_W", rating: 5, date: "05 Jul 2026", variant: "Warna: PINK", comment: "Aslinya jauhh lebih cantik dari foto! Worth it bgt." }
-        ]
-      },
-      {
-        id: 15,
-        name: "Romantic Floral Lace Bridal Heels",
-        price: 315000,
-        stock: 28,
-        rating: 4.9,
-        sold: 81,
-        colors: ["PUTIH", "PINK"],
-        colorMap: {
-          "PUTIH": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-          "PINK": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500"
-        },
-        img: "https://images.unsplash.com/photo-1531310197839-ccf54634509e?w=500",
-        desc: "Bridal Heels aksen renda bunga romantis transparan yang anggun, melengkapi keindahan momen berharga dalam hidup Anda.",
-        reviews: [
-          { name: "Diana_P", rating: 5, date: "01 Jul 2026", variant: "Warna: PUTIH", comment: "Bahan brokat rendanya halus banget, tidak bikin gatal!" }
-        ]
-      }
-    ];
-
-    /* DATA TRANSAKSI UTUH UNTUK LAPORAN HARIAN, BULANAN & TAHUNAN */
-    let orders = [
-      {
-        id: 'PHS-882910',
-        date: '07 Ags 2026',
-        category: 'harian',
-        customer: 'Clarissa M.',
-        items: [{ product: products[0], color: 'PINK', qty: 2 }],
-        total: 570000,
-        payment: 'Transfer Bank (BCA)',
-        status: 'Diproses'
-      },
-      {
-        id: 'PHS-882911',
-        date: '07 Ags 2026',
-        category: 'harian',
-        customer: 'Nadia_Fitri',
-        items: [{ product: products[1], color: 'PUTIH', qty: 1 }],
-        total: 325000,
-        payment: 'E-Wallet (Gopay)',
-        status: 'Selesai'
-      },
-      {
-        id: 'PHS-774102',
-        date: '01 Ags 2026',
-        category: 'bulanan',
-        customer: 'Anisa Syarif',
-        items: [{ product: products[2], color: 'NUDE', qty: 3 }],
-        total: 585000,
-        payment: 'COD (Bayar di Tempat)',
-        status: 'Selesai'
-      },
-      {
-        id: 'PHS-661034',
-        date: '15 Jul 2026',
-        category: 'bulanan',
-        customer: 'Dinda Kusuma',
-        items: [{ product: products[3], color: 'HITAM', qty: 1 }],
-        total: 245000,
-        payment: 'Transfer Bank (Mandiri)',
-        status: 'Selesai'
-      },
-      {
-        id: 'PHS-550192',
-        date: '10 Mei 2026',
-        category: 'tahunan',
-        customer: 'Siti Nurhaliza',
-        items: [{ product: products[4], color: 'NUDE', qty: 2 }],
-        total: 520000,
-        payment: 'E-Wallet (ShopeePay)',
-        status: 'Selesai'
-      }
-    ];
-
-    let cart = [];
-
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toast-text').innerText = message;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
-    }
-
-    /* NAVIGASI & ALUR PILIHAN PERAN + LOGIN */
-    function chooseRole(role) {
-      selectedRole = role;
-      const roleTitle = document.getElementById('login-role-title');
-      const roleSubtitle = document.getElementById('login-role-subtitle');
-      const userLabel = document.getElementById('login-user-label');
-
-      if (role === 'admin') {
-        roleTitle.innerText = "Login Admin (Penjual)";
-        roleSubtitle.innerText = "Silakan masukkan kredensial Admin Pretty Heels";
-        userLabel.innerText = "Username Admin";
-      } else {
-        roleTitle.innerText = "Login Pelanggan";
-        roleSubtitle.innerText = "Silakan masukkan nama/username Anda untuk masuk";
-        userLabel.innerText = "Username Pelanggan";
-      }
-
-      document.getElementById('login-username').value = '';
-      document.getElementById('login-password').value = '';
-
-      document.querySelectorAll('.page').forEach(p => {
-        p.classList.remove('active');
-      });
-
-      const loginPage = document.getElementById('login-page');
-      loginPage.classList.add('active');
-    }
-
-    function goToRoleSelection() {
-      document.querySelectorAll('.page').forEach(p => {
-        p.classList.remove('active');
-      });
-
-      const selectionPage = document.getElementById('role-selection-page');
-      selectionPage.classList.add('active');
-    }
-
-    /* ROUTER & NAVIGASI APLIKASI */
-    function navigateTo(pageId, pushToHistory = true) {
-      if (pushToHistory && historyStack[historyStack.length - 1] !== pageId) {
-        historyStack.push(pageId);
-      }
-
-      document.querySelectorAll('.page').forEach(p => {
-        p.classList.remove('active');
-      });
-
-      const activePage = document.getElementById(pageId);
-      if (activePage) {
-        activePage.classList.add('active');
-      }
-
-      const pageTitleEl = document.getElementById('page-title');
-      const backBtn = document.getElementById('back-btn');
-
-      if (historyStack.length > 1 && pageId !== 'customer-home' && pageId !== 'admin-dashboard-page') {
-        backBtn.style.display = 'block';
-      } else {
-        backBtn.style.display = 'none';
-      }
-
-      switch(pageId) {
-        case 'customer-home':
-          pageTitleEl.innerText = "Pretty Heels Store";
-          renderCustomerProducts();
-          break;
-        case 'product-detail-page':
-          pageTitleEl.innerText = "Detail Heels";
-          break;
-        case 'cart-page':
-          pageTitleEl.innerText = "Keranjang Belanja";
-          renderCart();
-          break;
-        case 'checkout-page':
-          pageTitleEl.innerText = "Checkout Pesanan";
-          renderCheckout();
-          break;
-        case 'customer-orders-page':
-          pageTitleEl.innerText = "Riwayat Pesanan Saya";
-          renderCustomerOrders();
-          break;
-        case 'customer-profile-page':
-          pageTitleEl.innerText = "Profil Pelanggan";
-          break;
-        case 'admin-dashboard-page':
-          pageTitleEl.innerText = "Admin Dashboard";
-          renderAdminDashboard();
-          break;
-        case 'admin-input-page':
-          pageTitleEl.innerText = document.getElementById('input-prod-id').value ? "Edit Heels" : "Input Heels Baru";
-          break;
-        case 'admin-products-page':
-          pageTitleEl.innerText = "Kelola Produk Heels";
-          renderAdminProducts();
-          break;
-        case 'admin-reports-page':
-          pageTitleEl.innerText = "Laporan Penjualan";
-          switchReportTab('harian');
-          break;
-        case 'admin-profile-page':
-          pageTitleEl.innerText = "Profil Admin & Store Manager";
-          break;
-      }
-
-      updateNavActiveState(pageId);
-      window.scrollTo(0,0);
-    }
-
-    function goBack() {
-      if (historyStack.length > 1) {
-        historyStack.pop();
-        const prevPage = historyStack[historyStack.length - 1];
-        navigateTo(prevPage, false);
-      }
-    }
-
-    function updateNavActiveState(pageId) {
-      document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-      const navs = document.querySelectorAll('.nav-item');
-      if (currentUser?.role === 'customer') {
-        if (pageId === 'customer-home') navs[0]?.classList.add('active');
-        if (pageId === 'customer-orders-page') navs[1]?.classList.add('active');
-        if (pageId === 'customer-profile-page') navs[2]?.classList.add('active');
-      } else if (currentUser?.role === 'admin') {
-        if (pageId === 'admin-dashboard-page') navs[0]?.classList.add('active');
-        if (pageId === 'admin-input-page') navs[1]?.classList.add('active');
-        if (pageId === 'admin-products-page') navs[2]?.classList.add('active');
-        if (pageId === 'admin-reports-page') navs[3]?.classList.add('active');
-        if (pageId === 'admin-profile-page') navs[4]?.classList.add('active');
-      }
-    }
-
-    /* AUTENTIKASI LOGIN */
-    function handleLogin(e) {
-      e.preventDefault();
-      const u = document.getElementById('login-username').value.trim();
-      const p = document.getElementById('login-password').value.trim();
-
-      if (selectedRole === 'admin') {
-        if (u === 'GSTORE' && p === 'GS01') {
-          currentUser = { role: 'admin', name: 'Sabine Rylee' };
-          completeLogin('admin-dashboard-page', "Selamat datang Admin Pretty Heels!");
-        } else {
-          showToast("Username/Password Admin Salah! (GSTORE / GS01)");
-        }
-      } else {
-        currentUser = { role: 'customer', name: u || 'Pelanggan Store' };
-        completeLogin('customer-home', `Selamat datang, ${currentUser.name}!`);
-      }
-    }
-
-    function completeLogin(targetPage, message) {
-      historyStack = [];
-      setupLayoutForUser();
-      showToast(message);
-      navigateTo(targetPage);
-    }
-
-    function handleLogout() {
-      currentUser = null;
-      document.getElementById('main-header').style.display = 'none';
-      document.getElementById('main-nav').style.display = 'none';
-      
-      goToRoleSelection();
-      historyStack = [];
-      showToast("Anda telah keluar dari akun");
-    }
-
-    function setupLayoutForUser() {
-      document.getElementById('main-header').style.display = 'flex';
-      const nav = document.getElementById('main-nav');
-      nav.style.display = 'flex';
-      const cartBtn = document.getElementById('header-actions');
-
-      if (currentUser.role === 'customer') {
-        cartBtn.style.display = 'block';
-        nav.innerHTML = `
-          <button class="nav-item" onclick="navigateTo('customer-home')"><i class="fa-solid fa-shoe-prints"></i>Marketplace</button>
-          <button class="nav-item" onclick="navigateTo('customer-orders-page')"><i class="fa-solid fa-receipt"></i>Pesanan Saya</button>
-          <button class="nav-item" onclick="navigateTo('customer-profile-page')"><i class="fa-solid fa-user"></i>Profil</button>
-        `;
-        const nameEl = document.getElementById('profile-display-name');
-        const emailEl = document.getElementById('profile-display-email');
-        if (nameEl) nameEl.innerText = currentUser.name;
-        if (emailEl) emailEl.innerText = `${currentUser.name.toLowerCase().replace(/\s+/g, '')}@gmail.com`;
-      } else {
-        cartBtn.style.display = 'none';
-        nav.innerHTML = `
-          <button class="nav-item" onclick="navigateTo('admin-dashboard-page')"><i class="fa-solid fa-chart-pie"></i>Dashboard</button>
-          <button class="nav-item" onclick="resetForm(); navigateTo('admin-input-page')"><i class="fa-solid fa-plus-circle"></i>Input</button>
-          <button class="nav-item" onclick="navigateTo('admin-products-page')"><i class="fa-solid fa-boxes-stacked"></i>Produk</button>
-          <button class="nav-item" onclick="navigateTo('admin-reports-page')"><i class="fa-solid fa-file-invoice"></i>Laporan</button>
-          <button class="nav-item" onclick="navigateTo('admin-profile-page')"><i class="fa-solid fa-user-gear"></i>Profil Admin</button>
-        `;
-      }
-    }
-
-    /* FITUR PELANGGAN & KATALOG */
-    function renderCustomerProducts() {
-      const grid = document.getElementById('customer-product-list');
-      if (!grid) return;
-      grid.innerHTML = products.map(p => `
-        <div class="product-card" onclick="openProductDetail(${p.id})">
-          <img src="${p.img}" class="product-img" alt="${p.name}">
-          <div class="product-info">
-            <span class="badge-store">Pretty Heels</span>
-            <div class="product-title">${p.name}</div>
-            <div class="product-price">Rp ${p.price.toLocaleString('id-ID')}</div>
-            <div class="product-meta">
-              <span><i class="fa-solid fa-star" style="color:#FFB800;"></i> ${p.rating}</span>
-              <span>${p.sold} Terjual</span>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function openProductDetail(id) {
-      selectedDetailProduct = products.find(p => p.id === id);
-      selectedColor = selectedDetailProduct.colors[0];
-      selectedQuantity = 1;
-
-      const initialImg = selectedDetailProduct.colorMap?.[selectedColor] || selectedDetailProduct.img;
-
-      const container = document.getElementById('detail-content');
-      container.innerHTML = `
-        <img src="${initialImg}" id="main-detail-img" class="detail-img" alt="${selectedDetailProduct.name}">
-        <div class="detail-container">
-          <span class="badge-store">Pretty Heels Store • Jakarta Selatan</span>
-          <h2 style="font-size:17px; margin:4px 0 8px;">${selectedDetailProduct.name}</h2>
-          <div style="font-size:20px; font-weight:700; color:var(--primary); margin-bottom:4px;">
-            Rp ${selectedDetailProduct.price.toLocaleString('id-ID')}
-          </div>
-          <div style="font-size:11px; color:var(--text-muted); margin-bottom:16px;">
-            <span>Stok Tersedia: ${selectedDetailProduct.stock} pair</span> | 
-            <span><i class="fa-solid fa-truck-fast" style="color: #27ae60;"></i> Pengiriman 2-3 Hari</span>
-          </div>
-
-          <hr style="border:none; border-top:1px solid var(--border); margin:12px 0;">
-
-          <h4 style="font-size:13px; margin-bottom:6px;">Deskripsi Lengkap Heels</h4>
-          <p style="font-size:12px; color:#555; line-height:1.6; margin-bottom:20px;">${selectedDetailProduct.desc}</p>
-
-          <hr style="border:none; border-top:1px solid var(--border); margin:12px 0;">
-
-          <div class="flex-between" style="margin-bottom:10px;">
-            <h4 style="font-size:14px; font-weight:700;">
-              ${selectedDetailProduct.rating} <i class="fa-solid fa-star" style="color:#FFB800;"></i> Penilaian Pembeli (${selectedDetailProduct.reviews ? selectedDetailProduct.reviews.length : 0})
-            </h4>
-          </div>
-
-          <div id="reviews-list">
-            ${renderReviews(selectedDetailProduct.reviews)}
-          </div>
-
-          <div style="display:flex; gap:10px; margin-top:24px;">
-            <button class="btn btn-outline" onclick="openVariantSheetForCart()"><i class="fa-solid fa-cart-plus"></i> + Keranjang</button>
-            <button class="btn btn-primary" onclick="openVariantSheetForBuy()">Beli Sekarang</button>
-          </div>
-        </div>
-      `;
-      navigateTo('product-detail-page');
-    }
-
-    function renderReviews(reviews) {
-      if (!reviews || reviews.length === 0) {
-        return `<p style="font-size:12px; color:var(--text-muted);">Belum ada ulasan untuk produk ini.</p>`;
-      }
-      return reviews.map(r => `
-        <div class="review-card">
-          <div class="review-header">
-            <span class="review-user">${r.name}</span>
-            <span class="review-date">${r.date}</span>
-          </div>
-          <div style="color:#FFB800; font-size:10px; margin-bottom:2px;">
-            ${'<i class="fa-solid fa-star"></i>'.repeat(r.rating)}
-          </div>
-          <div class="review-variant">${r.variant || 'Variasi: Standard'}</div>
-          <p class="review-comment">${r.comment}</p>
-        </div>
-      `).join('');
-    }
-
-    function updateCartBadge() {
-      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-      document.getElementById('cart-badge-count').innerText = totalQty;
-    }
-
-    function renderCart() {
-      const container = document.getElementById('cart-items-container');
-      const footer = document.getElementById('cart-footer');
-
-      if (cart.length === 0) {
-        container.innerHTML = `
-          <div class="text-center" style="padding:40px 0; color:var(--text-muted);">
-            <i class="fa-solid fa-shoe-prints" style="font-size:48px; color:var(--secondary); margin-bottom:12px;"></i>
-            <p>Keranjang belanjaan heels-mu masih kosong</p>
-          </div>
-        `;
-        footer.style.display = 'none';
-        return;
-      }
-
-      let total = 0;
-      container.innerHTML = cart.map((item, index) => {
-        const itemTotal = item.product.price * item.qty;
-        total += itemTotal;
-        return `
-          <div class="cart-item">
-            <img src="${item.selectedImg || item.product.img}" class="cart-img" alt="${item.product.name}">
-            <div class="cart-details">
-              <div style="font-weight:600; font-size:13px;">${item.product.name}</div>
-              <div style="font-size:11px; color:var(--text-muted);">Warna: <strong>${item.color}</strong></div>
-              <div style="font-weight:700; color:var(--primary); font-size:13px; margin-top:2px;">Rp ${item.product.price.toLocaleString('id-ID')}</div>
-              <div class="flex-between" style="margin-top:6px;">
-                <span style="font-size:12px;">Jumlah: <strong>${item.qty} pair</strong></span>
-                <div style="display:flex; gap:6px;">
-                  <button onclick="openVariantSheetFromCart(${index})" class="btn btn-secondary" style="padding:4px 8px; font-size:10px;"><i class="fa-solid fa-pen"></i> Ubah Opsi</button>
-                  <button onclick="removeFromCart(${index})" style="border:none; background:none; color:#FF3B30; font-size:11px; cursor:pointer;"><i class="fa-solid fa-trash"></i> Hapus</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      document.getElementById('cart-total-price').innerText = `Rp ${total.toLocaleString('id-ID')}`;
-      footer.style.display = 'block';
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCartBadge();
-      renderCart();
-      showToast("Produk dihapus dari keranjang");
-    }
-
-    function renderCheckout() {
-      const container = document.getElementById('checkout-items');
-      const nameEl = document.getElementById('checkout-cust-name');
-      if (nameEl) nameEl.innerText = currentUser ? currentUser.name : 'Pelanggan';
-
-      let subtotal = 0;
-      container.innerHTML = cart.map(item => {
-        const itemTotal = item.product.price * item.qty;
-        subtotal += itemTotal;
-        return `
-          <div class="cart-item">
-            <img src="${item.selectedImg || item.product.img}" class="cart-img" alt="${item.product.name}">
-            <div class="cart-details">
-              <div style="font-weight:600; font-size:13px;">${item.product.name}</div>
-              <div style="font-size:11px; color:var(--text-muted);">Warna Terpilih: <strong>${item.color}</strong></div>
-              <div class="flex-between" style="margin-top:6px;">
-                <span style="font-weight:700; color:var(--primary); font-size:12px;">Rp ${item.product.price.toLocaleString('id-ID')}</span>
-                <span style="font-size:12px;">x${item.qty} pair</span>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      const shipping = 15000;
-      const total = subtotal + shipping;
-
-      document.getElementById('checkout-subtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
-      document.getElementById('checkout-total').innerText = `Rp ${total.toLocaleString('id-ID')}`;
-    }
-
-    function openVariantSheetForCart() {
-      sheetTargetIndex = null;
-      sheetActionMode = 'add_to_cart';
-      openSheetGeneric(selectedDetailProduct, selectedColor, selectedQuantity, "Masukkan ke Keranjang");
-    }
-
-    function openVariantSheetForBuy() {
-      sheetTargetIndex = null;
-      sheetActionMode = 'buy_now';
-      openSheetGeneric(selectedDetailProduct, selectedColor, selectedQuantity, "Lanjut ke Checkout");
-    }
-
-    function openVariantSheetFromCart(index) {
-      sheetTargetIndex = index;
-      sheetActionMode = 'edit_cart';
-      const item = cart[index];
-      openSheetGeneric(item.product, item.color, item.qty, "Simpan Perubahan");
-    }
-
-    function openSheetGeneric(productObj, currentColor, currentQty, buttonLabel) {
-      selectedDetailProduct = productObj;
-      selectedColor = currentColor || productObj.colors[0];
-      selectedQuantity = currentQty || 1;
-
-      document.getElementById('sheet-prod-img').src = selectedDetailProduct.colorMap?.[selectedColor] || selectedDetailProduct.img;
-      document.getElementById('sheet-prod-price').innerText = `Rp ${selectedDetailProduct.price.toLocaleString('id-ID')}`;
-      document.getElementById('sheet-prod-stock').innerText = `Stok: ${selectedDetailProduct.stock}`;
-      document.getElementById('sheet-qty-val').innerText = selectedQuantity;
-      document.getElementById('sheet-action-btn').innerText = buttonLabel;
-
-      const optsContainer = document.getElementById('sheet-variant-options');
-      optsContainer.innerHTML = selectedDetailProduct.colors.map((c, i) => {
-        const thumbImg = selectedDetailProduct.colorMap?.[c] || selectedDetailProduct.img;
-        const isActive = c === selectedColor ? 'active' : '';
-        const isHot = i === 0 ? '<span style="color:var(--primary); margin-left:2px;">🔥</span>' : '';
-        return `
-          <div class="variant-card-btn ${isActive}" onclick="selectSheetColor('${c}', this, '${thumbImg}')">
-            <img src="${thumbImg}" alt="${c}">
-            <span>${c.toUpperCase()}</span> ${isHot}
-          </div>
-        `;
-      }).join('');
-
-      document.getElementById('variant-sheet-modal').classList.add('active');
-    }
-
-    function closeVariantSheet() {
-      document.getElementById('variant-sheet-modal').classList.remove('active');
-    }
-
-    function selectSheetColor(color, el, imgUrl) {
-      selectedColor = color;
-      document.querySelectorAll('#sheet-variant-options .variant-card-btn').forEach(btn => btn.classList.remove('active'));
-      el.classList.add('active');
-      document.getElementById('sheet-prod-img').src = imgUrl;
-    }
-
-    function updateSheetQty(change) {
-      selectedQuantity += change;
-      if (selectedQuantity < 1) selectedQuantity = 1;
-      if (selectedQuantity > selectedDetailProduct.stock) selectedQuantity = selectedDetailProduct.stock;
-      document.getElementById('sheet-qty-val').innerText = selectedQuantity;
-    }
-
-    function confirmSheetAction() {
-      const activeImg = selectedDetailProduct.colorMap?.[selectedColor] || selectedDetailProduct.img;
-
-      if (sheetActionMode === 'add_to_cart') {
-        const existing = cart.find(item => item.product.id === selectedDetailProduct.id && item.color === selectedColor);
-        if (existing) {
-          existing.qty += selectedQuantity;
-        } else {
-          cart.push({
-            product: selectedDetailProduct,
-            color: selectedColor,
-            selectedImg: activeImg,
-            qty: selectedQuantity
-          });
-        }
-        updateCartBadge();
-        showToast("Heels berhasil ditambahkan ke keranjang!");
-      } 
-      else if (sheetActionMode === 'buy_now') {
-        cart = [{
-          product: selectedDetailProduct,
-          color: selectedColor,
-          selectedImg: activeImg,
-          qty: selectedQuantity
-        }];
-        updateCartBadge();
-        navigateTo('checkout-page');
-      } 
-      else if (sheetActionMode === 'edit_cart' && sheetTargetIndex !== null) {
-        cart[sheetTargetIndex].color = selectedColor;
-        cart[sheetTargetIndex].selectedImg = activeImg;
-        cart[sheetTargetIndex].qty = selectedQuantity;
-        renderCart();
-        updateCartBadge();
-        showToast("Rincian keranjang diperbarui!");
-      }
-
-      closeVariantSheet();
-    }
-
-    function processOrder() {
-      if (cart.length === 0) return;
-
-      const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.qty), 0);
-      const total = subtotal + 15000;
-
-      const newOrder = {
-        id: 'PHS-' + Math.floor(100000 + Math.random() * 900000),
-        date: '07 Ags 2026',
-        category: 'harian',
-        customer: currentUser.name,
-        items: [...cart],
-        total: total,
-        payment: document.getElementById('payment-method').value,
-        status: 'Diproses'
-      };
-
-      orders.unshift(newOrder);
-      cart = [];
-      updateCartBadge();
-      showToast("Pesanan Heels Berhasil Dibuat!");
-      navigateTo('customer-orders-page');
-    }
-
-    function renderCustomerOrders() {
-      const container = document.getElementById('customer-order-list');
-      if (orders.length === 0) {
-        container.innerHTML = `<p class="text-center" style="color:var(--text-muted); padding:30px;">Belum ada riwayat pesanan.</p>`;
-        return;
-      }
-
-      container.innerHTML = orders.map(order => `
-        <div class="order-card" style="flex-direction:column;">
-          <div class="flex-between" style="border-bottom:1px solid var(--border); padding-bottom:6px; font-size:12px;">
-            <strong>${order.id}</strong>
-            <span style="color:var(--primary); font-weight:600;">${order.status}</span>
-          </div>
-          ${order.items.map(i => `
-            <div style="font-size:12px; margin:4px 0;">
-              • ${i.product.name} (${i.color || 'Standard'}) x${i.qty} pair
-            </div>
-          `).join('')}
-          <div class="flex-between" style="border-top:1px dashed var(--border); padding-top:6px; margin-top:6px; font-size:12px;">
-            <span>Total Pembayaran:</span>
-            <strong style="color:var(--primary);">Rp ${order.total.toLocaleString('id-ID')}</strong>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    /* FITUR ADMIN & LAPORAN */
-    function renderAdminDashboard() {
-      document.getElementById('stat-products').innerText = products.length;
-      document.getElementById('stat-orders').innerText = orders.length;
-      
-      const totalSales = orders.reduce((sum, o) => sum + o.total, 0);
-      document.getElementById('stat-sales').innerText = `Rp ${totalSales.toLocaleString('id-ID')}`;
-
-      const recentContainer = document.getElementById('admin-dashboard-recent-orders');
-      if (!recentContainer) return;
-
-      if (orders.length === 0) {
-        recentContainer.innerHTML = `<p style="font-size:12px; color:var(--text-muted);">Belum ada pesanan masuk.</p>`;
-        return;
-      }
-
-      recentContainer.innerHTML = orders.map(order => `
-        <div class="order-card" style="flex-direction:column;">
-          <div class="flex-between" style="font-size:12px; font-weight:600;">
-            <span>Pembeli: ${order.customer}</span>
-            <span style="color:var(--primary);">${order.id}</span>
-          </div>
-          <div style="font-size:11px; color:var(--text-muted); margin:4px 0;">
-            ${order.items.map(i => `${i.product.name} x${i.qty}`).join(', ')}
-          </div>
-          <div class="flex-between" style="font-size:12px;">
-            <span>Total: Rp ${order.total.toLocaleString('id-ID')}</span>
-            <span class="badge-store">${order.status}</span>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function renderAdminProducts() {
-      const container = document.getElementById('admin-product-list');
-      if (!container) return;
-
-      container.innerHTML = products.map(p => `
-        <div class="cart-item">
-          <img src="${p.img}" class="cart-img" alt="${p.name}">
-          <div class="cart-details">
-            <div style="font-weight:600; font-size:13px;">${p.name}</div>
-            <div style="font-size:11px; color:var(--text-muted);">Stok: ${p.stock} | Terjual: ${p.sold}</div>
-            <div style="font-weight:700; color:var(--primary); font-size:13px; margin-top:2px;">Rp ${p.price.toLocaleString('id-ID')}</div>
-            <div style="display:flex; gap:8px; margin-top:8px;">
-              <button onclick="editProduct(${p.id})" class="btn btn-secondary" style="padding:4px 8px; font-size:11px;"><i class="fa-solid fa-pen"></i> Edit</button>
-              <button onclick="deleteProduct(${p.id})" class="btn btn-outline" style="padding:4px 8px; font-size:11px; border-color:#FF3B30; color:#FF3B30;"><i class="fa-solid fa-trash"></i> Hapus</button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function resetForm() {
-      document.getElementById('product-form').reset();
-      document.getElementById('input-prod-id').value = '';
-    }
-
-    function saveProduct(e) {
-      e.preventDefault();
-      const id = document.getElementById('input-prod-id').value;
-      const name = document.getElementById('input-prod-name').value;
-      const colors = document.getElementById('input-prod-colors').value.split(',').map(c=>c.trim());
-      const price = parseInt(document.getElementById('input-prod-price').value);
-      const stock = parseInt(document.getElementById('input-prod-stock').value);
-      const img = document.getElementById('input-prod-img').value;
-      const desc = document.getElementById('input-prod-desc').value;
-
-      if (id) {
-        const prod = products.find(p => p.id == id);
-        if (prod) {
-          Object.assign(prod, { name, colors, price, stock, img, desc });
-          showToast("Data Heels berhasil diperbarui!");
-        }
-      } else {
-        const newProd = {
-          id: Date.now(),
-          name, colors, price, stock, img, desc,
-          rating: 5.0,
-          sold: 0,
-          reviews: []
-        };
-        products.unshift(newProd);
-        showToast("Heels baru berhasil ditambahkan!");
-      }
-
-      resetForm();
-      navigateTo('admin-products-page');
-    }
-
-    function editProduct(id) {
-      const prod = products.find(p => p.id === id);
-      if (!prod) return;
-
-      document.getElementById('input-prod-id').value = prod.id;
-      document.getElementById('input-prod-name').value = prod.name;
-      document.getElementById('input-prod-colors').value = prod.colors.join(', ');
-      document.getElementById('input-prod-price').value = prod.price;
-      document.getElementById('input-prod-stock').value = prod.stock;
-      document.getElementById('input-prod-img').value = prod.img;
-      document.getElementById('input-prod-desc').value = prod.desc;
-
-      navigateTo('admin-input-page');
-    }
-
-    function deleteProduct(id) {
-      if (confirm("Apakah Anda yakin ingin menghapus Heels ini?")) {
-        products = products.filter(p => p.id !== id);
-        renderAdminProducts();
-        showToast("Heels berhasil dihapus!");
-      }
-    }
-
-    function switchReportTab(type, element) {
-      if (element) {
-        const container = element.parentElement;
-        container.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
-        element.classList.add('active');
-      }
-
-      const periodeText = document.getElementById('report-periode-text');
-      const titleEl = document.getElementById('report-title');
-      const countEl = document.getElementById('report-count');
-      const itemsSoldEl = document.getElementById('report-items-sold');
-      const grossEl = document.getElementById('report-gross');
-      const feeEl = document.getElementById('report-fee');
-      const revenueEl = document.getElementById('report-revenue');
-      const listEl = document.getElementById('report-transaction-list');
-
-      let activeOrders = [];
-
-      if (type === 'harian') {
-        periodeText.innerText = "Periode Laporan: Hari Ini (07 Ags 2026)";
-        titleEl.innerText = "Ringkasan Laporan Harian";
-        activeOrders = orders.filter(o => o.category === 'harian' || o.date === '07 Ags 2026');
-      } else if (type === 'bulanan') {
-        periodeText.innerText = "Periode Laporan: Bulan Ini (Agustus 2026)";
-        titleEl.innerText = "Ringkasan Laporan Bulanan";
-        activeOrders = orders.filter(o => o.category === 'harian' || o.category === 'bulanan');
-      } else if (type === 'tahunan') {
-        periodeText.innerText = "Periode Laporan: Tahun Ini (Tahun 2026)";
-        titleEl.innerText = "Ringkasan Laporan Tahunan";
-        activeOrders = orders;
-      }
-
-      let totalCount = activeOrders.length;
-      let totalItems = 0;
-      let totalGross = 0;
-
-      activeOrders.forEach(o => {
-        totalGross += o.total;
-        if (o.items) {
-          o.items.forEach(i => totalItems += i.qty);
-        }
-      });
-
-      const adminFee = Math.round(totalGross * 0.03);
-      const netRevenue = totalGross - adminFee;
-
-      countEl.innerText = `${totalCount} Pesanan`;
-      itemsSoldEl.innerText = `${totalItems} Pair`;
-      grossEl.innerText = `Rp ${totalGross.toLocaleString('id-ID')}`;
-      feeEl.innerText = `- Rp ${adminFee.toLocaleString('id-ID')}`;
-      revenueEl.innerText = `Rp ${netRevenue.toLocaleString('id-ID')}`;
-
-      if (activeOrders.length === 0) {
-        listEl.innerHTML = `<p style="font-size:12px; color:var(--text-muted); text-align:center; padding:20px;">Belum ada transaksi pada periode ini.</p>`;
-        return;
-      }
-
-      listEl.innerHTML = activeOrders.map(o => {
-        const itemNames = o.items ? o.items.map(i => `${i.product.name} (x${i.qty})`).join(', ') : 'Produk Heels';
-        const itemFee = Math.round(o.total * 0.03);
-        const itemNet = o.total - itemFee;
-
-        return `
-          <div style="background:var(--surface); padding:12px; border-radius:var(--radius); margin-bottom:10px; font-size:12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02);">
-            <div class="flex-between" style="border-bottom:1px dashed var(--border); padding-bottom:6px; margin-bottom:6px;">
-              <strong style="color:var(--primary);">${o.id}</strong>
-              <span style="color:var(--text-muted); font-size:11px;">${o.date}</span>
-            </div>
-            <div style="font-weight:600; margin-bottom:2px;">Pembeli: ${o.customer}</div>
-            <div style="color:var(--text-muted); font-size:11px; margin-bottom:6px;">${itemNames}</div>
-            <div class="flex-between" style="font-size:11px; background:#FAF6F8; padding:6px 8px; border-radius:6px;">
-              <span>Omset: <strong>Rp ${o.total.toLocaleString('id-ID')}</strong></span>
-              <span style="color:#27ae60;">Bersih: <strong>Rp ${itemNet.toLocaleString('id-ID')}</strong></span>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-  </script>
+  <!-- LOAD JS SECARA BERURUTAN -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="login.js"></script>
+  <script src="customer.js"></script>
+  <script src="admin.js"></script>
 </body>
 </html>

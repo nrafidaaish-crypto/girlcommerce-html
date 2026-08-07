@@ -1,4 +1,4 @@
-/* DATABASE PRODUK LENGKAP */
+/* DATABASE PRODUK LENGKAP (11 PRODUK DENGAN GAMBAR VALID) */
 let products = [
   {
     id: 1,
@@ -112,6 +112,98 @@ let products = [
     desc: "Koleksi khusus pesta Pernikahan dengan aksen mutiara asli yang dirangkai cermat.",
     reviews: [
       { name: "Nadia Vanessa", rating: 5, date: "25 Jul 2026", variant: "Warna: PUTIH", comment: "Sempurna untuk gaun pengantin saya! Terima kasih Pretty Heels." }
+    ]
+  },
+
+  /* 5 PRODUK BARU TAMBAHAN */
+  {
+    id: 7,
+    name: "Satin Ribbon Bow Slingback Heels 8cm",
+    price: 310000,
+    stock: 30,
+    rating: 4.9,
+    sold: 76,
+    colors: ["PINK", "PUTIH"],
+    colorMap: {
+      "PINK": "https://images.unsplash.com/photo-1581101767113-1677fc2beaa8?auto=format&fit=crop&w=500&q=80",
+      "PUTIH": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=500&q=80"
+    },
+    img: "https://images.unsplash.com/photo-1581101767113-1677fc2beaa8?auto=format&fit=crop&w=500&q=80",
+    desc: "Heels pita bahan satin sutra yang elegan, menciptakan kesan manis dan feminim secara instan.",
+    reviews: [
+      { name: "Gisca Amelia", rating: 5, date: "05 Ags 2026", variant: "Warna: PINK", comment: "Pitanya manis banget! Bikin penampilan makin standout." }
+    ]
+  },
+  {
+    id: 8,
+    name: "Glitter Sequin Prom High Heels 10cm",
+    price: 350000,
+    stock: 22,
+    rating: 4.8,
+    sold: 110,
+    colors: ["GOLD", "SILVER"],
+    colorMap: {
+      "GOLD": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=500&q=80",
+      "SILVER": "https://images.unsplash.com/photo-1531310197839-ccf54634509e?auto=format&fit=crop&w=500&q=80"
+    },
+    img: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=500&q=80",
+    desc: "Dibalut lapisan glitter mengkilap yang berkilau indah saat terkena pencahayaan pesta.",
+    reviews: [
+      { name: "Lianna Felicia", rating: 5, date: "04 Ags 2026", variant: "Warna: GOLD", comment: "Sangat bersinar saat dipakai malam hari di party venue!" }
+    ]
+  },
+  {
+    id: 9,
+    name: "Minimalist Clear Strap Mule Heels 6cm",
+    price: 225000,
+    stock: 45,
+    rating: 4.7,
+    sold: 198,
+    colors: ["CLEAR", "NUDE"],
+    colorMap: {
+      "CLEAR": "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=500&q=80",
+      "NUDE": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=500&q=80"
+    },
+    img: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=500&q=80",
+    desc: "Tren bening transparan dengan tali mika premium lentur yang tidak menimbulkan bekas di kulit.",
+    reviews: [
+      { name: "Shafira Aris", rating: 5, date: "06 Ags 2026", variant: "Warna: CLEAR", comment: "Tali beningnya lentur, gak sakit sama sekali pas dipakai jalan." }
+    ]
+  },
+  {
+    id: 10,
+    name: "Suede Cross-Strap Chunky Heels 7cm",
+    price: 275000,
+    stock: 38,
+    rating: 4.9,
+    sold: 140,
+    colors: ["BLACK", "BROWN"],
+    colorMap: {
+      "BLACK": "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=500&q=80",
+      "BROWN": "https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?auto=format&fit=crop&w=500&q=80"
+    },
+    img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=500&q=80",
+    desc: "Desain tali silang bergaya vintage berbahan suede premium dengan ketahanan ekstra.",
+    reviews: [
+      { name: "Aurelia Cinta", rating: 5, date: "03 Ags 2026", variant: "Warna: BLACK", comment: "Suka banget sama model tali silangnya, terkesan ramping di kaki." }
+    ]
+  },
+  {
+    id: 11,
+    name: "Lace Embroidery Wedding Pumps 9cm",
+    price: 395000,
+    stock: 18,
+    rating: 5.0,
+    sold: 64,
+    colors: ["WHITE", "CREAM"],
+    colorMap: {
+      "WHITE": "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=500&q=80",
+      "CREAM": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?auto=format&fit=crop&w=500&q=80"
+    },
+    img: "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=500&q=80",
+    desc: "Kombinasi brokat renda eksklusif bertabur payet halus buatan tangan untuk momen istimewa.",
+    reviews: [
+      { name: "Kania Putri", rating: 5, date: "01 Ags 2026", variant: "Warna: WHITE", comment: "Detail rendanya sangat halus dan rapi, pengerjaan jempolan!" }
     ]
   }
 ];

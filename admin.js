@@ -1,4 +1,5 @@
-/* FITUR DEDIKASI ADMIN */
+// FITUR PENJUAL & PANEL ADMIN (DASHBOARD, KELOLA PRODUK, LAPORAN KEUSANGAN)
+
 function renderAdminDashboard() {
   document.getElementById('stat-products').innerText = products.length;
   document.getElementById('stat-orders').innerText = orders.length;
@@ -70,16 +71,27 @@ function saveProduct(e) {
     const prod = products.find(p => p.id == id);
     if (prod) {
       Object.assign(prod, { name, colors, price, stock, img, desc });
+      if (!prod.colorMap) prod.colorMap = {};
+      colors.forEach(c => {
+        if (!prod.colorMap[c]) prod.colorMap[c] = img;
+      });
       showToast("Data Heels berhasil diperbarui!");
     }
   } else {
-    products.unshift({
+    const newProd = {
       id: Date.now(),
       name, colors, price, stock, img, desc,
-      rating: 5.0, sold: 0, reviews: []
-    });
+      rating: 5.0, sold: 0, reviews: [],
+      colorMap: {}
+    };
+    colors.forEach(c => { newProd.colorMap[c] = img; });
+    products.unshift(newProd);
     showToast("Heels baru berhasil ditambahkan!");
   }
+
+  renderCustomerProducts();
+  renderAdminProducts();
+  renderAdminDashboard();
 
   resetForm();
   navigateTo('admin-products-page');
@@ -103,19 +115,21 @@ function editProduct(id) {
 function deleteProduct(id) {
   if (confirm("Apakah Anda yakin ingin menghapus Heels ini?")) {
     products = products.filter(p => p.id !== id);
+    
     renderAdminProducts();
+    renderCustomerProducts();
+    renderAdminDashboard();
+    
     showToast("Heels berhasil dihapus!");
   }
 }
 
-/* FUNGSI PENARINGAN LAPORAN BERDASARKAN TAB */
 function switchReportTab(type, element) {
   if (element) {
     element.parentElement.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
     element.classList.add('active');
   }
 
-  // Filter Bertingkat: Harian -> Bulanan (Harian + Bulanan) -> Tahunan (Semua)
   let activeOrders = [];
   let titleText = "";
   let periodeText = "";
@@ -129,16 +143,14 @@ function switchReportTab(type, element) {
     titleText = "Ringkasan Laporan Bulanan";
     periodeText = "Periode Laporan: Agustus 2026";
   } else if (type === 'tahunan') {
-    activeOrders = orders; // Mengambil semua transaksi
+    activeOrders = orders;
     titleText = "Ringkasan Laporan Tahunan";
     periodeText = "Periode Laporan: Tahun 2026";
   }
 
-  // Update Teks Judul
   document.getElementById('report-title').innerText = titleText;
   document.getElementById('report-periode-text').innerText = periodeText;
 
-  // Hitung Kalkulasi Laporan
   let totalGross = activeOrders.reduce((sum, o) => sum + o.total, 0);
   let totalItems = activeOrders.reduce((sum, o) => sum + o.items.reduce((iSum, i) => iSum + i.qty, 0), 0);
   const adminFee = Math.round(totalGross * 0.03);
@@ -149,18 +161,17 @@ function switchReportTab(type, element) {
   document.getElementById('report-fee').innerText = `- Rp ${adminFee.toLocaleString('id-ID')}`;
   document.getElementById('report-revenue').innerText = `Rp ${(totalGross - adminFee).toLocaleString('id-ID')}`;
 
-  // Render Daftar Transaksi Terkait
   const listEl = document.getElementById('report-transaction-list');
   listEl.innerHTML = activeOrders.map(o => `
-    <div style="background:var(--surface); padding:12px; border-radius:var(--radius); margin-bottom:10px; font-size:12px;">
-      <div class="flex-between" style="border-bottom:1px dashed var(--border); padding-bottom:6px; margin-bottom:6px;">
+    <div style="background:rgba(255, 255, 255, 0.94); padding:12px; border-radius:var(--radius); margin-bottom:10px; font-size:12px; border:1px solid var(--border-light);">
+      <div class="flex-between" style="border-bottom:1px dashed var(--border-light); padding-bottom:6px; margin-bottom:6px;">
         <strong style="color:var(--primary);">${o.id}</strong>
         <span style="color:var(--text-muted); font-size:11px;">${o.date}</span>
       </div>
       <div>Pembeli: ${o.customer}</div>
-      <div class="flex-between" style="font-size:11px; background:#FAF6F8; padding:6px 8px; border-radius:6px; margin-top:6px;">
+      <div class="flex-between" style="font-size:11px; background:var(--color-cream); padding:6px 8px; border-radius:6px; margin-top:6px;">
         <span>Omset: Rp ${o.total.toLocaleString('id-ID')}</span>
-        <span style="color:#27ae60;">Bersih: Rp ${(o.total - Math.round(o.total * 0.03)).toLocaleString('id-ID')}</span>
+        <span style="color:#27ae60; font-weight:700;">Bersih: Rp ${(o.total - Math.round(o.total * 0.03)).toLocaleString('id-ID')}</span>
       </div>
     </div>
   `).join('');

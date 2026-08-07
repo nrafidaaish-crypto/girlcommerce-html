@@ -1,0 +1,90 @@
+/* AUTENTIKASI LOGIN & PILIH PERAN */
+function chooseRole(role) {
+  selectedRole = role;
+  const roleTitle = document.getElementById('login-role-title');
+  const roleSubtitle = document.getElementById('login-role-subtitle');
+  const userLabel = document.getElementById('login-user-label');
+
+  if (role === 'admin') {
+    roleTitle.innerText = "Login Admin (Penjual)";
+    roleSubtitle.innerText = "Silakan masukkan kredensial Admin Pretty Heels";
+    userLabel.innerText = "Username Admin";
+  } else {
+    roleTitle.innerText = "Login Pelanggan";
+    roleSubtitle.innerText = "Silakan masukkan nama/username Anda untuk masuk";
+    userLabel.innerText = "Username Pelanggan";
+  }
+
+  document.getElementById('login-username').value = '';
+  document.getElementById('login-password').value = '';
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('login-page').classList.add('active');
+}
+
+function goToRoleSelection() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('role-selection-page').classList.add('active');
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const u = document.getElementById('login-username').value.trim();
+  const p = document.getElementById('login-password').value.trim();
+
+  if (selectedRole === 'admin') {
+    if (u === 'GSTORE' && p === 'GS01') {
+      currentUser = { role: 'admin', name: 'Hiraya Georgienne' };
+      showWelcomeScreen();
+    } else {
+      showToast("Username/Password Admin Salah! (GSTORE / GS01)");
+    }
+  } else {
+    currentUser = { role: 'customer', name: u || 'Seraphine Azellie' };
+    showWelcomeScreen();
+  }
+}
+
+function showWelcomeScreen() {
+  historyStack = [];
+  const heading = document.getElementById('welcome-heading');
+  const subtext = document.getElementById('welcome-subtext');
+
+  if (currentUser.role === 'admin') {
+    heading.innerText = "Selamat Datang, Admin!";
+    subtext.innerHTML = `Selamat datang ke Pretty Heels Store, <br><strong style="font-size:18px; color:var(--primary);">${currentUser.name}</strong>`;
+  } else {
+    heading.innerText = "Selamat Datang!";
+    subtext.innerHTML = `Selamat datang ke Pretty Heels Store, <br><strong style="font-size:18px; color:var(--primary);">${currentUser.name}</strong>`;
+  }
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('welcome-page').classList.add('active');
+  document.getElementById('main-header').style.display = 'none';
+  document.getElementById('main-nav').style.display = 'none';
+}
+
+function proceedToMainApp() {
+  if (currentUser.role === 'admin') {
+    completeLogin('admin-dashboard-page', "Selamat bertugas Admin!");
+  } else {
+    completeLogin('customer-home', `Selamat berbelanja, ${currentUser.name}!`);
+  }
+}
+
+function completeLogin(targetPage, message) {
+  historyStack = [];
+  setupLayoutForUser();
+  showToast(message);
+  navigateTo(targetPage);
+}
+
+function handleLogout() {
+  currentUser = null;
+  document.getElementById('main-header').style.display = 'none';
+  document.getElementById('main-nav').style.display = 'none';
+  
+  goToRoleSelection();
+  historyStack = [];
+  showToast("Anda telah keluar dari akun");
+}

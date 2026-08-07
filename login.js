@@ -1,9 +1,20 @@
-/* AUTENTIKASI LOGIN & PILIH PERAN */
+// LOGIKA AKUN & AUTENTIKASI (LOGIN / LOGOUT / PERAN)
+
 function chooseRole(role) {
   selectedRole = role;
   const roleTitle = document.getElementById('login-role-title');
   const roleSubtitle = document.getElementById('login-role-subtitle');
   const userLabel = document.getElementById('login-user-label');
+  
+  const userInput = document.getElementById('login-username');
+  const emailInput = document.getElementById('login-email');
+  const phoneInput = document.getElementById('login-phone');
+  const passInput = document.getElementById('login-password');
+
+  userInput.value = "";
+  emailInput.value = "";
+  phoneInput.value = "";
+  passInput.value = "";
 
   if (role === 'admin') {
     roleTitle.innerText = "Login Admin (Penjual)";
@@ -11,12 +22,9 @@ function chooseRole(role) {
     userLabel.innerText = "Username Admin";
   } else {
     roleTitle.innerText = "Login Pelanggan";
-    roleSubtitle.innerText = "Silakan masukkan nama/username Anda untuk masuk";
+    roleSubtitle.innerText = "Silakan masukkan data akun Anda";
     userLabel.innerText = "Username Pelanggan";
   }
-
-  document.getElementById('login-username').value = '';
-  document.getElementById('login-password').value = '';
 
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('login-page').classList.add('active');
@@ -30,17 +38,29 @@ function goToRoleSelection() {
 function handleLogin(e) {
   e.preventDefault();
   const u = document.getElementById('login-username').value.trim();
+  const email = document.getElementById('login-email').value.trim();
+  const phone = document.getElementById('login-phone').value.trim();
   const p = document.getElementById('login-password').value.trim();
 
   if (selectedRole === 'admin') {
-    if (u === 'GSTORE' && p === 'GS01') {
-      currentUser = { role: 'admin', name: 'Hiraya Georgienne' };
+    if (u === 'Hiraya Georgienne' && p === 'prettyheelsSt' && email === 'hirayagienne@gmail.com' && phone === '082839103746') {
+      currentUser = { 
+        role: 'admin', 
+        name: 'Hiraya Georgienne',
+        email: 'hirayagienne@gmail.com',
+        phone: '082839103746'
+      };
       showWelcomeScreen();
     } else {
-      showToast("Username/Password Admin Salah! (GSTORE / GS01)");
+      showToast("Kredensial Admin Salah! Periksa kembali data Anda.");
     }
   } else {
-    currentUser = { role: 'customer', name: u || 'Seraphine Azellie' };
+    currentUser = { 
+      role: 'customer', 
+      name: u || 'Seraphine Azellie',
+      email: email || 'seraphineazellie@gmail.com',
+      phone: phone || '08123456789'
+    };
     showWelcomeScreen();
   }
 }
@@ -52,10 +72,10 @@ function showWelcomeScreen() {
 
   if (currentUser.role === 'admin') {
     heading.innerText = "Selamat Datang, Admin!";
-    subtext.innerHTML = `Selamat datang ke Pretty Heels Store, <br><strong style="font-size:18px; color:var(--primary);">${currentUser.name}</strong>`;
+    subtext.innerHTML = `Selamat bertugas di Pretty Heels Store, <br><strong style="font-size:18px; color:var(--primary);">${currentUser.name}</strong>`;
   } else {
     heading.innerText = "Selamat Datang!";
-    subtext.innerHTML = `Selamat datang ke Pretty Heels Store, <br><strong style="font-size:18px; color:var(--primary);">${currentUser.name}</strong>`;
+    subtext.innerHTML = `Selamat datang di Pretty Heels Store, <br><strong style="font-size:18px; color:var(--primary);">${currentUser.name}</strong>`;
   }
 
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -65,7 +85,6 @@ function showWelcomeScreen() {
 }
 
 function proceedToMainApp() {
-  // PAKSA SEMBUNYIKAN TOAST SAMBUTAN AGAR TIDAK MENGGANTUNG DI ATAS
   const toast = document.getElementById('toast');
   if (toast) toast.classList.remove('show');
 

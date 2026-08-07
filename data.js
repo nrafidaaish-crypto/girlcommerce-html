@@ -1,4 +1,9 @@
-/* DATABASE PRODUK LENGKAP (11 PRODUK DENGAN GAMBAR VALID) */
+// VARIABEL STATE GLOBAL
+let currentUser = null;
+let selectedRole = 'customer';
+let historyStack = [];
+
+// DATA PRODUK DUMMY
 let products = [
   {
     id: 1,
@@ -114,8 +119,6 @@ let products = [
       { name: "Nadia Vanessa", rating: 5, date: "25 Jul 2026", variant: "Warna: PUTIH", comment: "Sempurna untuk gaun pengantin saya! Terima kasih Pretty Heels." }
     ]
   },
-
-  /* 5 PRODUK BARU TAMBAHAN */
   {
     id: 7,
     name: "Satin Ribbon Bow Slingback Heels 8cm",
@@ -208,9 +211,8 @@ let products = [
   }
 ];
 
-/* DATABASE TRANSAKSI BERDASARKAN PERIODE */
+// DATA PESANAN DUMMY
 let orders = [
-  // Transaksi Harian (Hari Ini)
   {
     id: 'PHS-882910',
     date: '07 Ags 2026',
@@ -231,7 +233,6 @@ let orders = [
     payment: 'E-Wallet (Gopay)',
     status: 'Selesai'
   },
-  // Transaksi Tambahan untuk Bulanan (Bulan Ini)
   {
     id: 'PHS-882890',
     date: '02 Ags 2026',
@@ -252,7 +253,6 @@ let orders = [
     payment: 'COD (Bayar di Tempat)',
     status: 'Selesai'
   },
-  // Transaksi Tambahan untuk Tahunan (Tahun Ini)
   {
     id: 'PHS-881200',
     date: '15 Mei 2026',
@@ -275,4 +275,10 @@ let orders = [
   }
 ];
 
+// VARIABEL KERANJANG & MODAL VARIASI
 let cart = [];
+let selectedDetailProduct = null;
+let selectedColor = '';
+let selectedQuantity = 1;
+let sheetTargetIndex = null;
+let sheetActionMode = 'buy_now';

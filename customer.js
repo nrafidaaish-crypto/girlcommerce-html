@@ -1,9 +1,4 @@
-/* STATE LOKAL PELANGGAN */
-let selectedDetailProduct = null;
-let selectedColor = '';
-let selectedQuantity = 1;
-let sheetTargetIndex = null;
-let sheetActionMode = 'buy_now';
+// FITUR INTERAKSI PELANGGAN (KATALOG, DETAIL, KERANJANG, CHECKOUT, RIWAYAT)
 
 function renderCustomerProducts() {
   const grid = document.getElementById('customer-product-list');
@@ -26,6 +21,8 @@ function renderCustomerProducts() {
 
 function openProductDetail(id) {
   selectedDetailProduct = products.find(p => p.id === id);
+  if (!selectedDetailProduct) return;
+
   selectedColor = selectedDetailProduct.colors[0];
   selectedQuantity = 1;
 
@@ -36,7 +33,7 @@ function openProductDetail(id) {
     <img src="${initialImg}" id="main-detail-img" class="detail-img" alt="${selectedDetailProduct.name}">
     <div class="detail-container">
       <span class="badge-store">Pretty Heels Store • Jakarta Selatan</span>
-      <h2 style="font-size:17px; margin:4px 0 8px;">${selectedDetailProduct.name}</h2>
+      <h2 style="font-size:17px; margin:4px 0 8px; color:var(--text-dark);">${selectedDetailProduct.name}</h2>
       <div style="font-size:20px; font-weight:700; color:var(--primary); margin-bottom:4px;">
         Rp ${selectedDetailProduct.price.toLocaleString('id-ID')}
       </div>
@@ -45,15 +42,15 @@ function openProductDetail(id) {
         <span><i class="fa-solid fa-truck-fast" style="color: #27ae60;"></i> Pengiriman 2-3 Hari</span>
       </div>
 
-      <hr style="border:none; border-top:1px solid var(--border); margin:12px 0;">
+      <hr style="border:none; border-top:1px solid var(--border-light); margin:12px 0;">
 
-      <h4 style="font-size:13px; margin-bottom:6px;">Deskripsi Lengkap Heels</h4>
+      <h4 style="font-size:13px; margin-bottom:6px; color:var(--text-dark);">Deskripsi Lengkap Heels</h4>
       <p style="font-size:12px; color:#555; line-height:1.6; margin-bottom:20px;">${selectedDetailProduct.desc}</p>
 
-      <hr style="border:none; border-top:1px solid var(--border); margin:12px 0;">
+      <hr style="border:none; border-top:1px solid var(--border-light); margin:12px 0;">
 
       <div class="flex-between" style="margin-bottom:10px;">
-        <h4 style="font-size:14px; font-weight:700;">
+        <h4 style="font-size:14px; font-weight:700; color:var(--text-dark);">
           ${selectedDetailProduct.rating} <i class="fa-solid fa-star" style="color:#FFB800;"></i> Penilaian Pembeli (${selectedDetailProduct.reviews ? selectedDetailProduct.reviews.length : 0})
         </h4>
       </div>
@@ -90,20 +87,15 @@ function renderReviews(reviews) {
   `).join('');
 }
 
-function updateCartBadge() {
-  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-  document.getElementById('cart-badge-count').innerText = totalQty;
-}
-
 function renderCart() {
   const container = document.getElementById('cart-items-container');
   const footer = document.getElementById('cart-footer');
 
   if (cart.length === 0) {
     container.innerHTML = `
-      <div class="text-center" style="padding:40px 0; color:var(--text-muted);">
-        <i class="fa-solid fa-shoe-prints" style="font-size:48px; color:var(--secondary); margin-bottom:12px;"></i>
-        <p>Keranjang belanjaan heels-mu masih kosong</p>
+      <div class="text-center" style="padding:40px 0; color:var(--primary-dark);">
+        <i class="fa-solid fa-shoe-prints" style="font-size:48px; color:var(--color-rose); margin-bottom:12px;"></i>
+        <p style="font-weight:600;">Keranjang belanjaan heels-mu masih kosong</p>
       </div>
     `;
     footer.style.display = 'none';
@@ -146,7 +138,10 @@ function removeFromCart(index) {
 function renderCheckout() {
   const container = document.getElementById('checkout-items');
   const nameEl = document.getElementById('checkout-cust-name');
+  const phoneEl = document.getElementById('checkout-cust-phone');
+  
   if (nameEl) nameEl.innerText = currentUser ? currentUser.name : 'Seraphine Azellie';
+  if (phoneEl) phoneEl.innerText = currentUser ? currentUser.phone : '08123456789';
 
   let subtotal = 0;
   container.innerHTML = cart.map(item => {
@@ -190,78 +185,6 @@ function openVariantSheetFromCart(index) {
   openSheetGeneric(item.product, item.color, item.qty, "Simpan Perubahan");
 }
 
-function openSheetGeneric(productObj, currentColor, currentQty, buttonLabel) {
-  selectedDetailProduct = productObj;
-  selectedColor = currentColor || productObj.colors[0];
-  selectedQuantity = currentQty || 1;
-
-  document.getElementById('sheet-prod-img').src = selectedDetailProduct.colorMap?.[selectedColor] || selectedDetailProduct.img;
-  document.getElementById('sheet-prod-price').innerText = `Rp ${selectedDetailProduct.price.toLocaleString('id-ID')}`;
-  document.getElementById('sheet-prod-stock').innerText = `Stok: ${selectedDetailProduct.stock}`;
-  document.getElementById('sheet-qty-val').innerText = selectedQuantity;
-  document.getElementById('sheet-action-btn').innerText = buttonLabel;
-
-  const optsContainer = document.getElementById('sheet-variant-options');
-  optsContainer.innerHTML = selectedDetailProduct.colors.map((c, i) => {
-    const thumbImg = selectedDetailProduct.colorMap?.[c] || selectedDetailProduct.img;
-    const isActive = c === selectedColor ? 'active' : '';
-    return `
-      <div class="variant-card-btn ${isActive}" onclick="selectSheetColor('${c}', this, '${thumbImg}')">
-        <img src="${thumbImg}" alt="${c}">
-        <span>${c.toUpperCase()}</span>
-      </div>
-    `;
-  }).join('');
-
-  document.getElementById('variant-sheet-modal').classList.add('active');
-}
-
-function closeVariantSheet() {
-  document.getElementById('variant-sheet-modal').classList.remove('active');
-}
-
-function selectSheetColor(color, el, imgUrl) {
-  selectedColor = color;
-  document.querySelectorAll('#sheet-variant-options .variant-card-btn').forEach(btn => btn.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('sheet-prod-img').src = imgUrl;
-}
-
-function updateSheetQty(change) {
-  selectedQuantity += change;
-  if (selectedQuantity < 1) selectedQuantity = 1;
-  if (selectedQuantity > selectedDetailProduct.stock) selectedQuantity = selectedDetailProduct.stock;
-  document.getElementById('sheet-qty-val').innerText = selectedQuantity;
-}
-
-function confirmSheetAction() {
-  const activeImg = selectedDetailProduct.colorMap?.[selectedColor] || selectedDetailProduct.img;
-
-  if (sheetActionMode === 'add_to_cart') {
-    const existing = cart.find(item => item.product.id === selectedDetailProduct.id && item.color === selectedColor);
-    if (existing) {
-      existing.qty += selectedQuantity;
-    } else {
-      cart.push({ product: selectedDetailProduct, color: selectedColor, selectedImg: activeImg, qty: selectedQuantity });
-    }
-    updateCartBadge();
-    showToast("Heels berhasil ditambahkan ke keranjang!");
-  } else if (sheetActionMode === 'buy_now') {
-    cart = [{ product: selectedDetailProduct, color: selectedColor, selectedImg: activeImg, qty: selectedQuantity }];
-    updateCartBadge();
-    navigateTo('checkout-page');
-  } else if (sheetActionMode === 'edit_cart' && sheetTargetIndex !== null) {
-    cart[sheetTargetIndex].color = selectedColor;
-    cart[sheetTargetIndex].selectedImg = activeImg;
-    cart[sheetTargetIndex].qty = selectedQuantity;
-    renderCart();
-    updateCartBadge();
-    showToast("Rincian keranjang diperbarui!");
-  }
-
-  closeVariantSheet();
-}
-
 function processOrder() {
   if (cart.length === 0) return;
   const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.qty), 0);
@@ -270,7 +193,7 @@ function processOrder() {
     id: 'PHS-' + Math.floor(100000 + Math.random() * 900000),
     date: '07 Ags 2026',
     category: 'harian',
-    customer: currentUser.name,
+    customer: currentUser ? currentUser.name : 'Seraphine Azellie',
     items: [...cart],
     total: subtotal + 15000,
     payment: document.getElementById('payment-method').value,
@@ -286,18 +209,18 @@ function processOrder() {
 function renderCustomerOrders() {
   const container = document.getElementById('customer-order-list');
   if (orders.length === 0) {
-    container.innerHTML = `<p class="text-center" style="color:var(--text-muted); padding:30px;">Belum ada riwayat pesanan.</p>`;
+    container.innerHTML = `<p class="text-center" style="color:var(--primary-dark); padding:30px;">Belum ada riwayat pesanan.</p>`;
     return;
   }
 
   container.innerHTML = orders.map(order => `
     <div class="order-card" style="flex-direction:column;">
-      <div class="flex-between" style="border-bottom:1px solid var(--border); padding-bottom:6px; font-size:12px;">
+      <div class="flex-between" style="border-bottom:1px solid var(--border-light); padding-bottom:6px; font-size:12px;">
         <strong>${order.id}</strong>
         <span style="color:var(--primary); font-weight:600;">${order.status}</span>
       </div>
       ${order.items.map(i => `<div style="font-size:12px; margin:4px 0;">• ${i.product.name} (${i.color || 'Standard'}) x${i.qty} pair</div>`).join('')}
-      <div class="flex-between" style="border-top:1px dashed var(--border); padding-top:6px; margin-top:6px; font-size:12px;">
+      <div class="flex-between" style="border-top:1px dashed var(--border-light); padding-top:6px; margin-top:6px; font-size:12px;">
         <span>Total Pembayaran:</span>
         <strong style="color:var(--primary);">Rp ${order.total.toLocaleString('id-ID')}</strong>
       </div>
